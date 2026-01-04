@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>直播订单核对系统</title>
+    <!-- 引入SheetJS库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        /* 之前的CSS样式保持不变 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        /* ... 其余CSS样式 ... */
+    </style>
+</head>
+<body>
+    <!-- HTML结构保持不变 -->
+    <div class="container">
+        <!-- ... 所有HTML内容 ... -->
+    </div>
+
+    <script>
+        // 全局变量
+        let importedData = [];
+        let darenData = [];
+        let productData = [];
+        let dailyData = [];
+        let monthlyData = [];
+        let colorSizeData = [];
+        let sizeData = [];
+        let colorData = [];
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置默认日期为今天
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('datePicker').value = today;
+            
+            // 绑定事件监听器
+            bindEvents();
+        });
+        
+        // 绑定所有事件
+        function bindEvents() {
+            // 标签切换
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 更新活动标签
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新活动内容
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    document.getElementById(tabId + 'Tab').classList.add('active');
+                });
+            });
+            
+            // 导入Excel按钮 - 使用新的导入函数
+            document.getElementById('importExcelBtn').addEventListener('click', importExcelData);
+            
+            // 其他事件绑定保持不变...
+        }
+        
+        // 显示状态消息
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = 'status-message status-' + type;
+            statusEl.style.display = 'block';
+            
+            // 自动隐藏
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        // 读取Excel文件的函数
+        async function importExcelData() {
+            const fileInput = document.getElementById('excelFile');
+            
+            if (fileInput.files.length === 0) {
+                showStatus('请先选择Excel文件', 'error');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            
+            showStatus(`正在解析文件: ${file.name}...`, 'info');
+            
+            try {
+                const excelData = await readExcelFile(file);
+                
+                // 处理导入的数据
+                processImportedData(excelData);
+                
+                showStatus(`成功导入 ${importedData.length} 条订单数据`, 'success');
+                
+                // 切换到导入数据标签页
+                document.querySelector('.tab[data-tab="import"]').click();
+                
+            } catch (error) {
+                showStatus(`导入失败: ${error.message}`, 'error');
+                console.error('Excel导入错误:', error);
+            }
+        }
+        
+        // 读取Excel文件
+        function readExcelFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const data = new Uint8Array(e.target.result);
+                        const workbook = XLSX.read(data, { type: 'array' });
+                        
+                        // 获取第一个工作表
+                        const firstSheetName = workbook.SheetNames[0];
+                        const worksheet = workbook.Sheets[firstSheetName];
+                        
+                        // 将工作表转换为JSON（包含表头）
+                        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                        
+                        resolve(jsonData);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                
+                reader.onerror = function() {
+                    reject(new Error('读取文件失败'));
+                };
+                
+                reader.readAsArrayBuffer(file);
+            });
+        }
+        
+        // 处理导入的Excel数据
+        function processImportedData(excelData) {
+            // 清空现有数据
+            importedData = [];
+            
+            if (!excelData || excelData.length < 2) {
+                throw new Error('Excel文件数据为空或格式不正确');
+            }
+            
+            // 获取表头（假设第一行是表头）
+            const headers = excelData[0];
+            
+            // 显示表头信息（用于调试）
+            console.log('Excel表头:', headers);
+            
+            // 从第二行开始处理数据
+            for (let i = 1; i < excelData.length; i++) {
+                const row = excelData[i];
+                
+                // 跳过空行
+                if (!row || row.length === 0) continue;
+                
+                // 创建数据对象
+                const item = {
+                    id: i,
+                    // 根据列索引获取数据
+                    达人ID: row[0] ? String(row[0]) : '',
+                    达人昵称: row[1] ? String(row[1]) : '',
+                    商品ID: row[2] ? String(row[2]) : '',
+                    选购商品: row[3] ? String(row[3]) : '',
+                    商品单价: row[4] ? parseFloat(row[4]) || 0 : 0,
+                    商品数量: row[5] ? parseInt(row[5]) || 1 : 1,
+                    商家实际承担优惠金额: row[6] ? parseFloat(row[6]) || 0 : 0,
+                    订单状态: row[7] ? String(row[7]) : '',
+                    售后状态: row[8] ? String(row[8]) : '',
+                    支付完成时间: row[9] ? formatDate(row[9]) : '',
+                    发货时间: row[10] ? formatDate(row[10]) : '',
+                    订单提交时间: row[11] ? formatDate(row[11]) : '',
+                    商品规格: row[12] ? String(row[12]) : ''
+                };
+                
+                importedData.push(item);
+            }
+            
+            // 显示导入的数据
+            displayImportedData();
+            
+            // 统计达人数据
+            countDarenData();
+            
+            // 统计商品数据
+            countProductData();
+        }
+        
+        // 格式化日期
+        function formatDate(dateValue) {
+            if (!dateValue) return '';
+            
+            // 如果是Date对象
+            if (dateValue instanceof Date) {
+                return dateValue.toLocaleString('zh-CN');
+            }
+            
+            // 如果是字符串
+            const str = String(dateValue);
+            
+            // 尝试解析Excel日期（Excel日期是数字）
+            if (!isNaN(dateValue) && dateValue > 25569) {
+                // Excel日期从1900-01-01开始
+                const excelDate = new Date((dateValue - 25569) * 86400 * 1000);
+                return excelDate.toLocaleString('zh-CN');
+            }
+            
+            return str;
+        }
+        
+        // 显示导入的数据
+        function displayImportedData() {
+            const tbody = document.getElementById('dataGrid1Body');
+            tbody.innerHTML = '';
+            
+            if (importedData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+                return;
+            }
+            
+            importedData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.id}</td>
+                    <td>${item.达人ID}</td>
+                    <td>${item.达人昵称}</td>
+                    <td>${item.商品ID}</td>
+                    <td>${item.选购商品}</td>
+                    <td>${item.商品单价.toFixed(2)}</td>
+                    <td>${item.订单状态}</td>
+                    <td>${item.支付完成时间}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 统计达人数据
+        function countDarenData() {
+            const darenMap = new Map();
+            
+            importedData.forEach(item => {
+                const key = item.达人昵称 + ',' + item.达人ID;
+                if (darenMap.has(key)) {
+                    darenMap.set(key, darenMap.get(key) + 1);
+                } else {
+                    darenMap.set(key, 1);
+                }
+            });
+            
+            // 转换为数组并排序
+            darenData = Array.from(darenMap, ([key, value]) => {
+                const [name, id] = key.split(',');
+                return { name, id, count: value, selected: false };
+            }).sort((a, b) => b.count - a.count);
+            
+            // 添加"统计所有达人订单"选项
+            darenData.push({ name: '', id: '统计所有达人订单', count: '', selected: false });
+            
+            // 显示达人数据
+            displayDarenData();
+        }
+        
+        // 显示达人数据
+        function displayDarenData() {
+            const tbody = document.getElementById('dataGrid3Body');
+            tbody.innerHTML = '';
+            
+            if (darenData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+                return;
+            }
+            
+            darenData.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="checkbox-cell">
+                        <input type="checkbox" data-index="${index}" ${item.selected ? 'checked' : ''}>
+                    </td>
+                    <td>${item.name}</td>
+                    <td>${item.id}</td>
+                    <td>${item.count}</td>
+                `;
+                
+                // 绑定复选框变化事件
+                const checkbox = row.querySelector('input[type="checkbox"]');
+                checkbox.addEventListener('change', function() {
+                    darenData[index].selected = this.checked;
+                });
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 统计商品数据
+        function countProductData() {
+            const productMap = new Map();
+            
+            importedData.forEach(item => {
+                const key = item.选购商品 + ',' + item.商品ID;
+                if (productMap.has(key)) {
+                    productMap.set(key, productMap.get(key) + 1);
+                } else {
+                    productMap.set(key, 1);
+                }
+            });
+            
+            // 转换为数组并排序
+            productData = Array.from(productMap, ([key, value]) => {
+                const [name, id] = key.split(',');
+                return { name, id, count: value, selected: true }; // 默认选中
+            }).sort((a, b) => b.count - a.count);
+            
+            // 显示商品数据
+            displayProductData();
+        }
+        
+        // 显示商品数据
+        function displayProductData() {
+            const tbody = document.getElementById('dataGrid6Body');
+            tbody.innerHTML = '';
+            
+            if (productData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+                return;
+            }
+            
+            productData.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="checkbox-cell">
+                        <input type="checkbox" data-index="${index}" ${item.selected ? 'checked' : ''}>
+                    </td>
+                    <td>${item.count}</td>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                `;
+                
+                // 绑定复选框变化事件
+                const checkbox = row.querySelector('input[type="checkbox"]');
+                checkbox.addEventListener('change', function() {
+                    productData[index].selected = this.checked;
+                });
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // ... 其他函数保持不变 ...
+    </script>
+</body>
+</html>
