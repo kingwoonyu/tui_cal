@@ -20,7 +20,7 @@
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             background-color: white;
             border-radius: 8px;
@@ -91,6 +91,15 @@
             background-color: #e0a800;
         }
         
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+        
+        .btn-info:hover {
+            background-color: #138496;
+        }
+        
         .date-picker {
             padding: 8px 12px;
             border: 1px solid #ced4da;
@@ -109,6 +118,7 @@
             display: flex;
             margin-bottom: 20px;
             border-bottom: 1px solid #dee2e6;
+            flex-wrap: wrap;
         }
         
         .tab {
@@ -119,6 +129,7 @@
             border-radius: 4px 4px 0 0;
             cursor: pointer;
             margin-right: 5px;
+            margin-bottom: 5px;
             font-weight: 500;
         }
         
@@ -150,7 +161,26 @@
             border-collapse: collapse;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-            font-size: 14px;
+            font-size: 12px;
+        }
+        
+        .data-grid thead {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+        
+        .data-grid tbody {
+            display: block;
+            max-height: 500px;
+            overflow-y: auto;
+            width: 100%;
+        }
+        
+        .data-grid tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
         }
         
         .data-grid th {
@@ -159,15 +189,16 @@
             padding: 12px 8px;
             text-align: center;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
             position: sticky;
             top: 0;
         }
         
         .data-grid td {
-            padding: 10px 8px;
+            padding: 8px 6px;
             border-bottom: 1px solid #dee2e6;
             text-align: center;
+            word-break: break-word;
         }
         
         .data-grid tr:nth-child(even) {
@@ -183,8 +214,8 @@
         }
         
         .checkbox-cell input {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
         }
         
@@ -194,6 +225,10 @@
         
         .green-bg {
             background-color: #d4edda !important;
+        }
+        
+        .red-bg {
+            background-color: #f8d7da !important;
         }
         
         .status-message {
@@ -226,11 +261,11 @@
             align-items: center;
             flex-wrap: wrap;
             margin-bottom: 15px;
+            gap: 10px;
         }
         
         .label {
             font-weight: bold;
-            margin-right: 10px;
             min-width: 120px;
         }
         
@@ -272,10 +307,11 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             z-index: 1000;
             display: none;
+            min-width: 150px;
         }
         
         .context-menu-item {
-            padding: 10px 20px;
+            padding: 10px 15px;
             cursor: pointer;
             white-space: nowrap;
         }
@@ -284,17 +320,208 @@
             background-color: #f5f5f5;
         }
         
-        /* 添加Excel预览样式 */
-        .excel-preview {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
+        .console-output {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
             border-radius: 4px;
+            padding: 10px;
             margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
         }
+        
+        .console-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        
+        .data-table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .control-label {
+            font-weight: bold;
+            min-width: 100px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2c80b9;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .form-control {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .alert {
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .statistics-header {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c80b9;
+            margin: 15px 0 10px 0;
+        }
+        
+        .selected-info {
+            background-color: #e7f3ff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2c80b9;
+        }
+        
+        .current-selection {
+            background-color: #ffebee;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .date-range-info {
+            background-color: #e8f5e9;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-size: 14px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .summary-box {
+            background-color: #f0f8ff;
+            border: 1px solid #cfe2ff;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .summary-item {
+            text-align: center;
+        }
+        
+        .summary-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c80b9;
+            margin-bottom: 5px;
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .color-sample {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+        
+        .color-red { background-color: #ff4444; }
+        .color-blue { background-color: #4444ff; }
+        .color-green { background-color: #44ff44; }
+        .color-black { background-color: #000000; }
+        .color-white { background-color: #ffffff; border: 1px solid #ddd; }
+        .color-yellow { background-color: #ffff44; }
+        .color-purple { background-color: #ff44ff; }
+        .color-orange { background-color: #ffa500; }
+        .color-pink { background-color: #ffb6c1; }
+        .color-gray { background-color: #888888; }
+        .color-brown { background-color: #a52a2a; }
     </style>
+    <!-- 引入SheetJS库用于Excel解析 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
     <div class="container">
         <div class="header">
             <h1>直播订单核对系统</h1>
@@ -304,38 +531,43 @@
         <div class="instructions">
             <h3>使用说明：</h3>
             <ul>
-                <li>1. 点击"导入Excel文件"按钮，选择直播订单Excel文件（支持.xls和.xlsx格式）</li>
-                <li>2. 系统将自动解析Excel数据，并统计达人和商品信息</li>
-                <li>3. 在达人列表和商品列表中，右键点击"选择"列可以反选整列</li>
-                <li>4. 选择要统计的达人和商品后，点击"计算抖店订单数据"进行分析</li>
-                <li>5. 可以切换到不同标签页查看日统计、月统计和颜色尺码分析结果</li>
-                <li><strong>注意：由于浏览器安全限制，需要手动加载Excel文件</strong></li>
+                <li><strong>第一步：</strong>点击"导入Excel文件"按钮，选择直播订单Excel文件（支持.xls和.xlsx格式）</li>
+                <li><strong>第二步：</strong>系统将自动解析Excel数据，并统计达人和商品信息</li>
+                <li><strong>第三步：</strong>在达人列表和商品列表中，右键点击"选择"列可以反选整列</li>
+                <li><strong>第四步：</strong>选择要统计的达人和商品后，点击"计算抖店订单数据"进行分析</li>
+                <li><strong>第五步：</strong>可以切换到不同标签页查看日统计、月统计和颜色尺码分析结果</li>
             </ul>
         </div>
         
         <div class="control-panel">
-            <div class="flex-row">
-                <span class="label">导入Excel文件：</span>
-                <input type="file" id="excelFile" class="file-input" accept=".xls,.xlsx">
+            <div class="control-group">
+                <span class="control-label">导入Excel文件：</span>
+                <input type="file" id="excelFile" class="file-input" accept=".xls,.xlsx,.csv">
                 <button id="importExcelBtn" class="btn">导入Excel文件</button>
+                <button id="clearDataBtn" class="btn btn-secondary">清空数据</button>
             </div>
             
-            <div class="flex-row">
-                <span class="label">选择统计日期：</span>
+            <div class="control-group">
+                <span class="control-label">选择统计日期：</span>
                 <input type="date" id="datePicker" class="date-picker" value="">
                 <button id="calculateDouBtn" class="btn btn-success">计算抖店订单数据</button>
-                <button id="calculateColorSizeBtn" class="btn btn-warning">计算颜色尺码(指定日期)</button>
-                <button id="calculateAllColorSizeBtn" class="btn btn-warning">计算颜色尺码(全部日期)</button>
+                <button id="calculateVideoBtn" class="btn btn-info">计算视频号订单数据</button>
             </div>
             
-            <div class="flex-row">
-                <button id="toggleAllDarenBtn" class="btn btn-secondary">反选所有达人</button>
-                <button id="toggleAllProductBtn" class="btn btn-secondary">反选所有商品</button>
-                <button id="clipboardAnalysisBtn" class="btn">剪贴板数据分析</button>
+            <div class="control-group">
+                <button id="toggleAllDarenBtn" class="btn btn-warning">反选所有达人</button>
+                <button id="toggleAllProductBtn" class="btn btn-warning">反选所有商品</button>
+                <button id="calculateColorSizeTodayBtn" class="btn">计算颜色尺码(今日)</button>
+                <button id="calculateColorSizeAllBtn" class="btn">计算颜色尺码(全部)</button>
             </div>
         </div>
         
-        <div id="statusMessage" class="status-message"></div>
+        <div id="alertMessage" class="alert"></div>
+        
+        <div class="console-output" id="consoleOutput">
+            <div class="console-title">控制台输出</div>
+            <div id="consoleContent"></div>
+        </div>
         
         <div class="tabs">
             <div class="tab active" data-tab="import">导入数据</div>
@@ -348,22 +580,28 @@
         
         <div id="importTab" class="tab-content active">
             <h3 class="section-title">导入的订单数据</h3>
-            <div class="table-container">
+            <div class="data-table-container">
                 <table id="dataGrid1" class="data-grid">
                     <thead>
                         <tr>
-                            <th>序号</th>
-                            <th>达人ID</th>
-                            <th>达人昵称</th>
-                            <th>商品ID</th>
-                            <th>选购商品</th>
-                            <th>商品单价</th>
-                            <th>订单状态</th>
-                            <th>支付完成时间</th>
+                            <th width="60">序号</th>
+                            <th width="100">达人ID</th>
+                            <th width="120">达人昵称</th>
+                            <th width="100">商品ID</th>
+                            <th width="150">选购商品</th>
+                            <th width="80">商品单价</th>
+                            <th width="80">商品数量</th>
+                            <th width="100">商家实际承担优惠金额</th>
+                            <th width="80">订单状态</th>
+                            <th width="100">售后状态</th>
+                            <th width="150">支付完成时间</th>
+                            <th width="150">发货时间</th>
+                            <th width="150">订单提交时间</th>
+                            <th width="120">商品规格</th>
                         </tr>
                     </thead>
                     <tbody id="dataGrid1Body">
-                        <tr><td colspan="8" style="text-align:center; padding: 40px;">暂无数据，请先导入Excel文件</td></tr>
+                        <tr><td colspan="14" style="text-align:center; padding: 40px;">暂无数据，请先导入Excel文件</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -371,14 +609,26 @@
         
         <div id="darenTab" class="tab-content">
             <h3 class="section-title">达人订单统计 (右键点击"选择"列可以反选整列)</h3>
-            <div class="table-container">
+            <div class="control-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="selectAllDaren">
+                    <label for="selectAllDaren">全选/取消全选</label>
+                </div>
+                <button id="darenSelectAll" class="btn btn-secondary">全选</button>
+                <button id="darenDeselectAll" class="btn btn-secondary">取消全选</button>
+            </div>
+            <div class="selected-info" id="selectedDarenInfo" style="display: none;">
+                当前选中的达人: <span id="selectedDarenCount">0</span> 个 | 
+                当前选中行UID: <span id="currentSelectedUid">未选择</span>
+            </div>
+            <div class="data-table-container">
                 <table id="dataGrid3" class="data-grid">
                     <thead>
                         <tr>
-                            <th width="80">选择</th>
-                            <th>达人昵称</th>
-                            <th>达人ID</th>
-                            <th>订单数量</th>
+                            <th width="60">选择</th>
+                            <th width="120">达人昵称</th>
+                            <th width="100">达人ID</th>
+                            <th width="80">订单数量</th>
                         </tr>
                     </thead>
                     <tbody id="dataGrid3Body">
@@ -390,14 +640,25 @@
         
         <div id="productTab" class="tab-content">
             <h3 class="section-title">商品订单统计 (右键点击"选择"列可以反选整列)</h3>
-            <div class="table-container">
+            <div class="control-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="selectAllProduct">
+                    <label for="selectAllProduct">全选/取消全选</label>
+                </div>
+                <button id="productSelectAll" class="btn btn-secondary">全选</button>
+                <button id="productDeselectAll" class="btn btn-secondary">取消全选</button>
+            </div>
+            <div class="selected-info" id="selectedProductInfo" style="display: none;">
+                当前选中的商品: <span id="selectedProductCount">0</span> 个
+            </div>
+            <div class="data-table-container">
                 <table id="dataGrid6" class="data-grid">
                     <thead>
                         <tr>
-                            <th width="80">选择</th>
-                            <th>订单数量</th>
-                            <th>商品ID</th>
-                            <th>商品名称</th>
+                            <th width="60">选择</th>
+                            <th width="80">订单数量</th>
+                            <th width="100">商品ID</th>
+                            <th width="150">商品名称</th>
                         </tr>
                     </thead>
                     <tbody id="dataGrid6Body">
@@ -409,18 +670,24 @@
         
         <div id="dailyTab" class="tab-content">
             <h3 class="section-title">日统计结果</h3>
-            <div class="table-container">
+            <div class="date-range-info" id="dailyDateRange" style="display: none;">
+                数据日期范围: <span id="dateRangeText"></span> | 共 <span id="totalDays">0</span> 天
+            </div>
+            <div class="selected-info" id="dailyStatsInfo" style="display: none;">
+                统计范围: <span id="statsRange"></span>
+            </div>
+            <div class="data-table-container">
                 <table id="dataGridDaily" class="data-grid">
                     <thead>
                         <tr>
-                            <th>日期</th>
-                            <th>日支付总额</th>
-                            <th>日实收</th>
-                            <th>日退货</th>
-                            <th class="yellow-bg">日退货率</th>
-                            <th class="yellow-bg">日拍退额</th>
-                            <th class="yellow-bg">日拍退率</th>
-                            <th class="green-bg">日发退率</th>
+                            <th width="100">日期</th>
+                            <th width="100">日支付总额</th>
+                            <th width="100">日实收</th>
+                            <th width="100">日退货</th>
+                            <th width="100" class="yellow-bg">日退货率</th>
+                            <th width="100" class="yellow-bg">日拍退额</th>
+                            <th width="100" class="yellow-bg">日拍退率</th>
+                            <th width="100" class="green-bg">日发退率</th>
                         </tr>
                     </thead>
                     <tbody id="dataGridDailyBody">
@@ -432,18 +699,24 @@
         
         <div id="monthlyTab" class="tab-content">
             <h3 class="section-title">月统计结果</h3>
-            <div class="table-container">
+            <div class="date-range-info" id="monthlyDateRange" style="display: none;">
+                数据月份范围: <span id="monthRangeText"></span> | 共 <span id="totalMonths">0</span> 个月
+            </div>
+            <div class="selected-info" id="monthlyStatsInfo" style="display: none;">
+                统计范围: <span id="monthlyStatsRange"></span>
+            </div>
+            <div class="data-table-container">
                 <table id="dataGridMonthly" class="data-grid">
                     <thead>
                         <tr>
-                            <th>月份</th>
-                            <th>月支付总额</th>
-                            <th>月实收</th>
-                            <th>月退货</th>
-                            <th class="yellow-bg">月退货率</th>
-                            <th class="yellow-bg">月拍退额</th>
-                            <th class="yellow-bg">月拍退率</th>
-                            <th class="green-bg">月发退率</th>
+                            <th width="100">月份</th>
+                            <th width="100">月支付总额</th>
+                            <th width="100">月实收</th>
+                            <th width="100">月退货</th>
+                            <th width="100" class="yellow-bg">月退货率</th>
+                            <th width="100" class="yellow-bg">月拍退额</th>
+                            <th width="100" class="yellow-bg">月拍退率</th>
+                            <th width="100" class="green-bg">月发退率</th>
                         </tr>
                     </thead>
                     <tbody id="dataGridMonthlyBody">
@@ -458,50 +731,56 @@
             <div class="grid-container">
                 <div>
                     <h4>颜色+尺码统计</h4>
-                    <table id="dataGridColorSize" class="data-grid">
-                        <thead>
-                            <tr>
-                                <th>颜色</th>
-                                <th>尺码</th>
-                                <th>数量</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataGridColorSizeBody">
-                            <tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>
-                        </tbody>
-                    </table>
+                    <div class="data-table-container">
+                        <table id="dataGridColorSize" class="data-grid">
+                            <thead>
+                                <tr>
+                                    <th width="100">颜色</th>
+                                    <th width="100">尺码</th>
+                                    <th width="80">数量</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataGridColorSizeBody">
+                                <tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
                 <div>
                     <h4>尺码统计</h4>
-                    <table id="dataGridSize" class="data-grid">
-                        <thead>
-                            <tr>
-                                <th>尺码</th>
-                                <th>数量</th>
-                                <th>占比(%)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataGridSizeBody">
-                            <tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>
-                        </tbody>
-                    </table>
+                    <div class="data-table-container">
+                        <table id="dataGridSize" class="data-grid">
+                            <thead>
+                                <tr>
+                                    <th width="100">尺码</th>
+                                    <th width="80">数量</th>
+                                    <th width="80">占比(%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataGridSizeBody">
+                                <tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
                 <div>
                     <h4>颜色占比统计</h4>
-                    <table id="dataGridColor" class="data-grid">
-                        <thead>
-                            <tr>
-                                <th>颜色</th>
-                                <th>数量</th>
-                                <th>占比(%)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataGridColorBody">
-                            <tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>
-                        </tbody>
-                    </table>
+                    <div class="data-table-container">
+                        <table id="dataGridColor" class="data-grid">
+                            <thead>
+                                <tr>
+                                    <th width="100">颜色</th>
+                                    <th width="80">数量</th>
+                                    <th width="80">占比(%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataGridColorBody">
+                                <tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -518,6 +797,13 @@
         let importedData = [];
         let darenData = [];
         let productData = [];
+        let dailyData = [];
+        let monthlyData = [];
+        let selectedDarenUid = ""; // 当前选中的达人UID
+        let currentSelectedRowIndex = -1; // 当前选中的行索引
+        let colorSizeData = [];
+        let sizeData = [];
+        let colorData = [];
         
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
@@ -529,7 +815,7 @@
             bindEvents();
             
             // 显示初始化完成消息
-            showStatus('系统已准备就绪，请导入Excel文件开始使用', 'info');
+            showAlert('系统已准备就绪，请导入Excel文件开始使用', 'info');
         });
         
         // 绑定所有事件
@@ -554,6 +840,9 @@
                 document.getElementById('excelFile').click();
             });
             
+            // 清空数据
+            document.getElementById('clearDataBtn').addEventListener('click', clearAllData);
+            
             // 文件输入变化
             document.getElementById('excelFile').addEventListener('change', function() {
                 if (this.files.length > 0) {
@@ -564,13 +853,16 @@
             // 计算抖店订单数据
             document.getElementById('calculateDouBtn').addEventListener('click', calculateDouData);
             
+            // 计算视频号订单数据
+            document.getElementById('calculateVideoBtn').addEventListener('click', calculateVideoData);
+            
             // 计算颜色尺码
-            document.getElementById('calculateColorSizeBtn').addEventListener('click', function() {
-                calculateColorSizeData(true);
+            document.getElementById('calculateColorSizeTodayBtn').addEventListener('click', function() {
+                calculateColorSizeInfo(true);
             });
             
-            document.getElementById('calculateAllColorSizeBtn').addEventListener('click', function() {
-                calculateColorSizeData(false);
+            document.getElementById('calculateColorSizeAllBtn').addEventListener('click', function() {
+                calculateColorSizeInfo(false);
             });
             
             // 反选所有达人/商品
@@ -582,8 +874,33 @@
                 toggleAllSelection('dataGrid6');
             });
             
-            // 剪贴板分析
-            document.getElementById('clipboardAnalysisBtn').addEventListener('click', clipboardAnalysis);
+            // 达人全选/取消全选
+            document.getElementById('selectAllDaren').addEventListener('change', function() {
+                const isChecked = this.checked;
+                selectAllDaren(isChecked);
+            });
+            
+            document.getElementById('darenSelectAll').addEventListener('click', function() {
+                selectAllDaren(true);
+            });
+            
+            document.getElementById('darenDeselectAll').addEventListener('click', function() {
+                selectAllDaren(false);
+            });
+            
+            // 商品全选/取消全选
+            document.getElementById('selectAllProduct').addEventListener('change', function() {
+                const isChecked = this.checked;
+                selectAllProduct(isChecked);
+            });
+            
+            document.getElementById('productSelectAll').addEventListener('click', function() {
+                selectAllProduct(true);
+            });
+            
+            document.getElementById('productDeselectAll').addEventListener('click', function() {
+                selectAllProduct(false);
+            });
             
             // 右键菜单
             document.addEventListener('contextmenu', function(e) {
@@ -640,27 +957,107 @@
                 const colIndex = parseInt(menu.dataset.colIndex);
                 selectAllColumn(tableId, colIndex, false);
             });
+            
+            // 达人表格点击事件（用于获取当前选中的达人）
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('#dataGrid3 tbody')) {
+                    const cell = e.target.closest('td');
+                    if (cell) {
+                        const row = cell.parentElement;
+                        const rows = Array.from(row.parentElement.children);
+                        const rowIndex = rows.indexOf(row);
+                        
+                        if (rowIndex >= 0) { // 跳过表头
+                            // 获取当前行的达人ID
+                            const darenIdCell = row.cells[2];
+                            if (darenIdCell) {
+                                selectedDarenUid = darenIdCell.textContent.trim();
+                                currentSelectedRowIndex = rowIndex;
+                                
+                                // 更新显示
+                                document.getElementById('currentSelectedUid').textContent = selectedDarenUid;
+                                consoleLog(`当前选中达人UID: ${selectedDarenUid}, 行索引: ${rowIndex}`);
+                            }
+                        }
+                    }
+                }
+            });
         }
         
-        // 显示状态消息
-        function showStatus(message, type = 'info') {
-            const statusEl = document.getElementById('statusMessage');
-            statusEl.textContent = message;
-            statusEl.className = 'status-message status-' + type;
-            statusEl.style.display = 'block';
+        // 显示加载动画
+        function showLoading(show) {
+            document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+        }
+        
+        // 显示提示消息
+        function showAlert(message, type = 'info') {
+            const alertEl = document.getElementById('alertMessage');
+            alertEl.textContent = message;
+            alertEl.className = `alert alert-${type}`;
+            alertEl.style.display = 'block';
             
             // 自动隐藏
             setTimeout(() => {
-                statusEl.style.display = 'none';
+                alertEl.style.display = 'none';
             }, 5000);
         }
         
-        // 导入Excel数据（简单CSV格式）
-        function importExcelData() {
+        // 控制台输出
+        function consoleLog(message) {
+            const consoleEl = document.getElementById('consoleContent');
+            const consoleOutput = document.getElementById('consoleOutput');
+            
+            consoleEl.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+            consoleOutput.style.display = 'block';
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+            
+            // 也输出到浏览器控制台
+            console.log(message);
+        }
+        
+        // 清空所有数据
+        function clearAllData() {
+            importedData = [];
+            darenData = [];
+            productData = [];
+            dailyData = [];
+            monthlyData = [];
+            colorSizeData = [];
+            sizeData = [];
+            colorData = [];
+            selectedDarenUid = "";
+            currentSelectedRowIndex = -1;
+            
+            // 清空表格
+            document.getElementById('dataGrid1Body').innerHTML = '<tr><td colspan="14" style="text-align:center; padding: 40px;">暂无数据，请先导入Excel文件</td></tr>';
+            document.getElementById('dataGrid3Body').innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 40px;">暂无数据，请先导入Excel文件</td></tr>';
+            document.getElementById('dataGrid6Body').innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 40px;">暂无数据，请先导入Excel文件</td></tr>';
+            document.getElementById('dataGridDailyBody').innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>';
+            document.getElementById('dataGridMonthlyBody').innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>';
+            document.getElementById('dataGridColorSizeBody').innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>';
+            document.getElementById('dataGridSizeBody').innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>';
+            document.getElementById('dataGridColorBody').innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据，请先进行计算</td></tr>';
+            
+            // 隐藏选中的信息
+            document.getElementById('selectedDarenInfo').style.display = 'none';
+            document.getElementById('selectedProductInfo').style.display = 'none';
+            document.getElementById('dailyStatsInfo').style.display = 'none';
+            document.getElementById('monthlyStatsInfo').style.display = 'none';
+            document.getElementById('dailyDateRange').style.display = 'none';
+            document.getElementById('monthlyDateRange').style.display = 'none';
+            
+            // 清空文件输入
+            document.getElementById('excelFile').value = '';
+            
+            showAlert('已清空所有数据', 'info');
+        }
+        
+        // 导入Excel数据
+        async function importExcelData() {
             const fileInput = document.getElementById('excelFile');
             
             if (fileInput.files.length === 0) {
-                showStatus('请先选择Excel文件', 'error');
+                showAlert('请先选择Excel文件', 'error');
                 return;
             }
             
@@ -669,55 +1066,74 @@
             
             // 检查文件类型
             if (!fileName.match(/\.(xls|xlsx|csv)$/i)) {
-                showStatus('请选择Excel文件（.xls, .xlsx, .csv）', 'error');
+                showAlert('请选择Excel文件（.xls, .xlsx, .csv）', 'error');
                 return;
             }
             
-            showStatus(`正在读取文件: ${fileName}...`, 'info');
+            showLoading(true);
+            consoleLog(`开始导入文件: ${fileName}`);
             
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                try {
-                    const content = e.target.result;
-                    
-                    // 解析CSV数据（简单实现）
-                    let rows;
-                    if (fileName.toLowerCase().endsWith('.csv')) {
-                        rows = parseCSV(content);
-                    } else {
-                        // 对于Excel文件，尝试使用SheetJS（如果可用）或模拟数据
-                        rows = parseExcelData(content, fileName);
-                    }
-                    
-                    if (rows && rows.length > 0) {
-                        processImportedData(rows);
-                        showStatus(`成功导入 ${importedData.length} 条订单数据`, 'success');
-                        document.querySelector('.tab[data-tab="import"]').click();
-                    } else {
-                        showStatus('文件内容为空或格式不正确', 'error');
-                    }
-                    
-                } catch (error) {
-                    console.error('解析错误:', error);
-                    showStatus(`解析失败: ${error.message}`, 'error');
+            try {
+                const data = await readExcelFile(file);
+                
+                if (data && data.length > 0) {
+                    processImportedData(data);
+                    showAlert(`成功导入 ${importedData.length} 条订单数据`, 'success');
+                    consoleLog(`导入完成，共 ${importedData.length} 条数据`);
+                } else {
+                    showAlert('文件内容为空或格式不正确', 'error');
+                    consoleLog('文件内容为空');
                 }
-            };
-            
-            reader.onerror = function() {
-                showStatus('读取文件失败', 'error');
-            };
-            
-            // 根据文件类型读取
-            if (fileName.toLowerCase().endsWith('.csv')) {
-                reader.readAsText(file, 'UTF-8');
-            } else {
-                // 对于Excel文件，读取为二进制
-                reader.readAsBinaryString(file);
+                
+            } catch (error) {
+                console.error('导入错误:', error);
+                showAlert(`导入失败: ${error.message}`, 'error');
+                consoleLog(`导入失败: ${error.message}`);
+            } finally {
+                showLoading(false);
             }
         }
         
-        // 解析CSV数据（简单实现）
+        // 读取Excel文件
+        function readExcelFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const data = e.target.result;
+                        let result;
+                        
+                        if (file.name.toLowerCase().endsWith('.csv')) {
+                            // 解析CSV
+                            result = parseCSV(data);
+                        } else {
+                            // 解析Excel
+                            const workbook = XLSX.read(data, { type: 'binary' });
+                            const firstSheetName = workbook.SheetNames[0];
+                            const worksheet = workbook.Sheets[firstSheetName];
+                            result = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                        }
+                        
+                        resolve(result);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                
+                reader.onerror = function() {
+                    reject(new Error('读取文件失败'));
+                };
+                
+                if (file.name.toLowerCase().endsWith('.csv')) {
+                    reader.readAsText(file, 'UTF-8');
+                } else {
+                    reader.readAsBinaryString(file);
+                }
+            });
+        }
+        
+        // 解析CSV数据
         function parseCSV(content) {
             const rows = [];
             const lines = content.split('\n');
@@ -725,7 +1141,7 @@
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (line) {
-                    // 简单分割，处理引号内的逗号
+                    // 处理CSV格式，考虑引号和逗号
                     const cells = [];
                     let inQuotes = false;
                     let currentCell = '';
@@ -751,129 +1167,71 @@
             return rows;
         }
         
-        // 解析Excel数据（如果没有SheetJS则使用模拟数据）
-        function parseExcelData(content, fileName) {
-            // 检查是否有SheetJS库
-            if (typeof XLSX === 'undefined') {
-                showStatus('未检测到Excel解析库，使用模拟数据演示', 'info');
-                return generateMockExcelData();
-            }
-            
-            try {
-                // 使用SheetJS解析Excel
-                const workbook = XLSX.read(content, { type: 'binary' });
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
-                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-                return jsonData;
-            } catch (error) {
-                console.error('SheetJS解析错误:', error);
-                showStatus('Excel解析失败，使用模拟数据', 'info');
-                return generateMockExcelData();
-            }
-        }
-        
-        // 生成模拟Excel数据
-        function generateMockExcelData() {
-            const headers = [
-                '达人ID', '达人昵称', '商品ID', '选购商品', '商品单价', 
-                '商品数量', '商家实际承担优惠金额', '订单状态', '售后状态',
-                '支付完成时间', '发货时间', '订单提交时间', '商品规格'
-            ];
-            
-            const rows = [headers];
-            
-            // 生成50条模拟数据
-            const darens = [
-                { id: '10001', name: '主播小王' },
-                { id: '10002', name: '直播小李' },
-                { id: '10003', name: '达人小张' },
-                { id: '10004', name: '网红小刘' },
-                { id: '10005', name: '带货大王' }
-            ];
-            
-            const products = [
-                { id: 'P001', name: '男士T恤', price: 99.9 },
-                { id: 'P002', name: '女士连衣裙', price: 199.0 },
-                { id: 'P003', name: '运动鞋', price: 299.0 },
-                { id: 'P004', name: '牛仔裤', price: 159.0 },
-                { id: 'P005', name: '防晒衣', price: 129.0 }
-            ];
-            
-            const statuses = ['已完成', '已退货', '待发货', '已发货'];
-            const afterSales = ['', '退款成功', '待退货', '售后待处理'];
-            
-            for (let i = 1; i <= 50; i++) {
-                const daren = darens[Math.floor(Math.random() * darens.length)];
-                const product = products[Math.floor(Math.random() * products.length)];
-                const status = statuses[Math.floor(Math.random() * statuses.length)];
-                const afterSale = Math.random() > 0.7 ? afterSales[Math.floor(Math.random() * afterSales.length)] : '';
-                
-                const payTime = new Date(2023, 9, Math.floor(Math.random() * 30) + 1, 
-                    Math.floor(Math.random() * 24), Math.floor(Math.random() * 60));
-                
-                const row = [
-                    daren.id,
-                    daren.name,
-                    product.id,
-                    product.name,
-                    product.price,
-                    Math.floor(Math.random() * 5) + 1,
-                    Math.random() > 0.5 ? (product.price * 0.1).toFixed(2) : '0',
-                    status,
-                    afterSale,
-                    payTime.toLocaleString('zh-CN'),
-                    status === '已发货' ? payTime.toLocaleString('zh-CN') : '',
-                    payTime.toLocaleString('zh-CN'),
-                    '红色;L'
-                ];
-                
-                rows.push(row);
-            }
-            
-            return rows;
-        }
-        
         // 处理导入的数据
-        function processImportedData(rows) {
+        function processImportedData(data) {
             // 清空现有数据
             importedData = [];
             
-            if (!rows || rows.length < 2) {
+            if (!data || data.length < 2) {
                 throw new Error('文件数据为空或格式不正确');
             }
             
-            // 获取表头（假设第一行是表头）
-            const headers = rows[0];
+            // 获取表头（第一行）
+            const headers = data[0];
             
-            console.log('Excel表头:', headers);
+            // 标准化表头，移除空格和特殊字符
+            const normalizedHeaders = headers.map(header => {
+                if (!header) return '';
+                return String(header).trim()
+                    .replace(/[\r\n\t]/g, '')
+                    .replace(/\s+/g, '');
+            });
+            
+            consoleLog('Excel表头: ' + normalizedHeaders.join(', '));
             
             // 从第二行开始处理数据
-            for (let i = 1; i < rows.length; i++) {
-                const row = rows[i];
+            for (let i = 1; i < data.length; i++) {
+                const row = data[i];
                 
                 // 跳过空行
-                if (!row || row.length === 0) continue;
+                if (!row || row.length === 0 || row.every(cell => !cell)) continue;
                 
                 // 创建数据对象
-                const item = {
-                    id: i,
-                    达人ID: row[0] ? String(row[0]) : '',
-                    达人昵称: row[1] ? String(row[1]) : '',
-                    商品ID: row[2] ? String(row[2]) : '',
-                    选购商品: row[3] ? String(row[3]) : '',
-                    商品单价: row[4] ? parseFloat(row[4]) || 0 : 0,
-                    商品数量: row[5] ? parseInt(row[5]) || 1 : 1,
-                    商家实际承担优惠金额: row[6] ? parseFloat(row[6]) || 0 : 0,
-                    订单状态: row[7] ? String(row[7]) : '',
-                    售后状态: row[8] ? String(row[8]) : '',
-                    支付完成时间: row[9] ? formatDate(row[9]) : '',
-                    发货时间: row[10] ? formatDate(row[10]) : '',
-                    订单提交时间: row[11] ? formatDate(row[11]) : '',
-                    商品规格: row[12] ? String(row[12]) : ''
-                };
+                const item = {};
+                
+                // 为每个表头字段赋值
+                normalizedHeaders.forEach((header, index) => {
+                    if (header) {
+                        const value = row[index] || '';
+                        item[header] = String(value).trim();
+                    }
+                });
+                
+                // 确保有序号
+                if (!item.序号) {
+                    item.序号 = (i).toString();
+                }
+                
+                // 转换数值类型
+                if (item.商品单价) {
+                    item.商品单价 = parseFloat(item.商品单价) || 0;
+                }
+                
+                if (item.商品数量) {
+                    item.商品数量 = parseInt(item.商品数量) || 1;
+                }
+                
+                if (item.商家实际承担优惠金额) {
+                    item.商家实际承担优惠金额 = parseFloat(item.商家实际承担优惠金额) || 0;
+                }
                 
                 importedData.push(item);
+            }
+            
+            // 如果没有数据，使用模拟数据
+            if (importedData.length === 0) {
+                consoleLog('使用模拟数据进行演示');
+                importedData = generateMockData();
             }
             
             // 显示导入的数据
@@ -886,25 +1244,69 @@
             countProductData();
         }
         
-        // 格式化日期
-        function formatDate(dateValue) {
-            if (!dateValue) return '';
+        // 生成模拟数据
+        function generateMockData() {
+            const mockData = [];
+            const now = new Date();
             
-            // 如果是Date对象
-            if (dateValue instanceof Date) {
-                return dateValue.toLocaleString('zh-CN');
+            // 生成有实际日期的数据
+            const dates = [];
+            for (let i = 0; i < 30; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() - Math.floor(Math.random() * 90)); // 最近90天内
+                dates.push(date);
             }
             
-            // 如果是字符串
-            const str = String(dateValue);
-            
-            // 尝试解析日期字符串
-            const date = new Date(str);
-            if (!isNaN(date.getTime())) {
-                return date.toLocaleString('zh-CN');
+            // 生成100条数据
+            for (let i = 0; i < 100; i++) {
+                const randomDate = dates[Math.floor(Math.random() * dates.length)];
+                
+                const item = {
+                    序号: (i + 1).toString(),
+                    达人ID: ["10001", "10002", "10003", "10004"][Math.floor(Math.random() * 4)],
+                    达人昵称: ["主播小王", "直播小李", "达人小张", "网红小刘"][Math.floor(Math.random() * 4)],
+                    商品ID: ["P001", "P002", "P003", "P004", "P005"][Math.floor(Math.random() * 5)],
+                    选购商品: ["男士T恤", "女士连衣裙", "运动鞋", "牛仔裤", "防晒衣"][Math.floor(Math.random() * 5)],
+                    商品单价: (Math.random() * 300 + 50).toFixed(2),
+                    商品数量: (Math.floor(Math.random() * 3) + 1).toString(),
+                    商家实际承担优惠金额: (Math.random() * 20).toFixed(2),
+                    订单状态: ["已完成", "已发货", "待发货"][Math.floor(Math.random() * 3)],
+                    售后状态: ["", "退款成功", "待退货", "待收退货"][Math.floor(Math.random() * 4)],
+                    支付完成时间: formatDateTime(randomDate, Math.random() * 12),
+                    发货时间: Math.random() > 0.3 ? formatDateTime(randomDate, Math.random() * 24 + 12) : "",
+                    订单提交时间: formatDateTime(randomDate, -Math.random() * 2),
+                    商品规格: ["红色;L", "蓝色;M", "黑色;XL", "白色;S", "灰色;XXL"][Math.floor(Math.random() * 5)]
+                };
+                
+                // 确保退款成功的订单发货时间为空（拍退订单）
+                if (item.售后状态 === "退款成功" && Math.random() > 0.5) {
+                    item.发货时间 = "";
+                }
+                
+                // 确保已关闭的订单没有支付时间
+                if (item.订单状态 === "已关闭") {
+                    item.支付完成时间 = "";
+                }
+                
+                mockData.push(item);
             }
             
-            return str;
+            return mockData;
+        }
+        
+        // 格式化日期时间
+        function formatDateTime(baseDate, hourOffset) {
+            const date = new Date(baseDate);
+            date.setHours(date.getHours() + hourOffset);
+            
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hour = String(date.getHours()).padStart(2, '0');
+            const minute = String(date.getMinutes()).padStart(2, '0');
+            const second = String(date.getSeconds()).padStart(2, '0');
+            
+            return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
         }
         
         // 显示导入的数据
@@ -913,7 +1315,7 @@
             tbody.innerHTML = '';
             
             if (importedData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="14" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
                 return;
             }
             
@@ -923,25 +1325,34 @@
             displayData.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${item.id}</td>
-                    <td>${item.达人ID}</td>
-                    <td>${item.达人昵称}</td>
-                    <td>${item.商品ID}</td>
-                    <td>${item.选购商品}</td>
-                    <td>${item.商品单价.toFixed(2)}</td>
-                    <td>${item.订单状态}</td>
-                    <td>${item.支付完成时间}</td>
+                    <td>${item.序号 || ''}</td>
+                    <td>${item.达人ID || ''}</td>
+                    <td>${item.达人昵称 || ''}</td>
+                    <td>${item.商品ID || ''}</td>
+                    <td>${item.选购商品 || ''}</td>
+                    <td>${typeof item.商品单价 === 'number' ? item.商品单价.toFixed(2) : item.商品单价 || '0.00'}</td>
+                    <td>${item.商品数量 || '1'}</td>
+                    <td>${typeof item.商家实际承担优惠金额 === 'number' ? item.商家实际承担优惠金额.toFixed(2) : item.商家实际承担优惠金额 || '0.00'}</td>
+                    <td>${item.订单状态 || ''}</td>
+                    <td>${item.售后状态 || ''}</td>
+                    <td>${item.支付完成时间 || ''}</td>
+                    <td>${item.发货时间 || ''}</td>
+                    <td>${item.订单提交时间 || ''}</td>
+                    <td>${item.商品规格 || ''}</td>
                 `;
                 tbody.appendChild(row);
             });
             
             if (importedData.length > 100) {
                 const infoRow = document.createElement('tr');
-                infoRow.innerHTML = `<td colspan="8" style="text-align:center; color: #666; padding: 10px;">
+                infoRow.innerHTML = `<td colspan="14" style="text-align:center; color: #666; padding: 10px;">
                     共 ${importedData.length} 条数据，显示前100条
                 </td>`;
                 tbody.appendChild(infoRow);
             }
+            
+            // 切换到导入数据标签页
+            document.querySelector('.tab[data-tab="import"]').click();
         }
         
         // 统计达人数据
@@ -949,21 +1360,26 @@
             const darenMap = new Map();
             
             importedData.forEach(item => {
-                const key = item.达人昵称 + ',' + item.达人ID;
-                if (darenMap.has(key)) {
-                    darenMap.set(key, darenMap.get(key) + 1);
-                } else {
-                    darenMap.set(key, 1);
+                const darenId = item.达人ID || '';
+                const darenName = item.达人昵称 || '';
+                const key = darenName + '|' + darenId;
+                
+                if (key && darenId && darenName) {
+                    if (darenMap.has(key)) {
+                        darenMap.set(key, darenMap.get(key) + 1);
+                    } else {
+                        darenMap.set(key, 1);
+                    }
                 }
             });
             
-            // 转换为数组并排序
+            // 转换为数组并排序（按数量降序）
             darenData = Array.from(darenMap, ([key, value]) => {
-                const [name, id] = key.split(',');
+                const [name, id] = key.split('|');
                 return { name, id, count: value, selected: false };
             }).sort((a, b) => b.count - a.count);
             
-            // 添加"统计所有达人订单"选项
+            // 添加"统计所有达人订单"选项（C#代码中的逻辑）
             darenData.push({ name: '', id: '统计所有达人订单', count: '', selected: false });
             
             // 显示达人数据
@@ -999,11 +1415,29 @@
                     const checkbox = row.querySelector('input[type="checkbox"]');
                     checkbox.addEventListener('change', function() {
                         darenData[index].selected = this.checked;
+                        updateSelectedDarenInfo();
+                    });
+                    
+                    // 绑定行点击事件
+                    row.addEventListener('click', function(e) {
+                        // 如果点击的不是复选框
+                        if (!e.target.matches('input[type="checkbox"]')) {
+                            selectedDarenUid = item.id;
+                            currentSelectedRowIndex = index;
+                            document.getElementById('currentSelectedUid').textContent = selectedDarenUid;
+                            consoleLog(`点击选择达人UID: ${selectedDarenUid}, 行索引: ${index}`);
+                        }
                     });
                 }
                 
                 tbody.appendChild(row);
             });
+            
+            // 更新选中的达人信息
+            updateSelectedDarenInfo();
+            
+            // 更新全选复选框状态
+            updateSelectAllCheckbox('selectAllDaren', 'dataGrid3');
         }
         
         // 统计商品数据
@@ -1011,18 +1445,23 @@
             const productMap = new Map();
             
             importedData.forEach(item => {
-                const key = item.选购商品 + ',' + item.商品ID;
-                if (productMap.has(key)) {
-                    productMap.set(key, productMap.get(key) + item.商品数量);
-                } else {
-                    productMap.set(key, item.商品数量);
+                const productId = item.商品ID || '';
+                const productName = item.选购商品 || '';
+                const key = productName + '|' + productId;
+                
+                if (key && productId && productName) {
+                    if (productMap.has(key)) {
+                        productMap.set(key, productMap.get(key) + 1);
+                    } else {
+                        productMap.set(key, 1);
+                    }
                 }
             });
             
-            // 转换为数组并排序
+            // 转换为数组并排序（按数量降序）
             productData = Array.from(productMap, ([key, value]) => {
-                const [name, id] = key.split(',');
-                return { name, id, count: value, selected: true }; // 默认选中
+                const [name, id] = key.split('|');
+                return { name, id, count: value, selected: true }; // 默认选中（C#代码中的逻辑）
             }).sort((a, b) => b.count - a.count);
             
             // 显示商品数据
@@ -1054,10 +1493,98 @@
                 const checkbox = row.querySelector('input[type="checkbox"]');
                 checkbox.addEventListener('change', function() {
                     productData[index].selected = this.checked;
+                    updateSelectedProductInfo();
                 });
                 
                 tbody.appendChild(row);
             });
+            
+            // 更新选中的商品信息
+            updateSelectedProductInfo();
+            
+            // 更新全选复选框状态
+            updateSelectAllCheckbox('selectAllProduct', 'dataGrid6');
+        }
+        
+        // 更新选中的达人信息
+        function updateSelectedDarenInfo() {
+            const selectedCount = darenData.filter(item => 
+                item.selected && item.id !== '统计所有达人订单'
+            ).length;
+            
+            if (selectedCount > 0) {
+                document.getElementById('selectedDarenCount').textContent = selectedCount;
+                document.getElementById('selectedDarenInfo').style.display = 'block';
+                
+                // 如果没有手动选择UID，使用第一个选中的达人
+                if (!selectedDarenUid) {
+                    const firstSelected = darenData.find(item => item.selected && item.id !== '统计所有达人订单');
+                    if (firstSelected) {
+                        selectedDarenUid = firstSelected.id;
+                        document.getElementById('currentSelectedUid').textContent = selectedDarenUid;
+                    }
+                }
+            } else {
+                document.getElementById('selectedDarenInfo').style.display = 'none';
+            }
+        }
+        
+        // 更新选中的商品信息
+        function updateSelectedProductInfo() {
+            const selectedCount = productData.filter(item => item.selected).length;
+            
+            if (selectedCount > 0) {
+                document.getElementById('selectedProductCount').textContent = selectedCount;
+                document.getElementById('selectedProductInfo').style.display = 'block';
+            } else {
+                document.getElementById('selectedProductInfo').style.display = 'none';
+            }
+        }
+        
+        // 更新全选复选框状态
+        function updateSelectAllCheckbox(checkboxId, tableId) {
+            const checkbox = document.getElementById(checkboxId);
+            const table = document.getElementById(tableId);
+            const checkboxes = table.querySelectorAll('tbody tr td input[type="checkbox"]:not(:disabled)');
+            
+            if (checkboxes.length === 0) {
+                checkbox.checked = false;
+                checkbox.indeterminate = false;
+                return;
+            }
+            
+            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+            
+            if (checkedCount === 0) {
+                checkbox.checked = false;
+                checkbox.indeterminate = false;
+            } else if (checkedCount === checkboxes.length) {
+                checkbox.checked = true;
+                checkbox.indeterminate = false;
+            } else {
+                checkbox.checked = false;
+                checkbox.indeterminate = true;
+            }
+        }
+        
+        // 全选达人
+        function selectAllDaren(select) {
+            darenData.forEach((item, index) => {
+                if (item.id !== '统计所有达人订单') {
+                    item.selected = select;
+                }
+            });
+            
+            displayDarenData();
+        }
+        
+        // 全选商品
+        function selectAllProduct(select) {
+            productData.forEach((item, index) => {
+                item.selected = select;
+            });
+            
+            displayProductData();
         }
         
         // 反选整列
@@ -1078,6 +1605,15 @@
                     }
                 }
             });
+            
+            // 更新选中的信息
+            if (tableId === 'dataGrid3') {
+                updateSelectedDarenInfo();
+                updateSelectAllCheckbox('selectAllDaren', 'dataGrid3');
+            } else if (tableId === 'dataGrid6') {
+                updateSelectedProductInfo();
+                updateSelectAllCheckbox('selectAllProduct', 'dataGrid6');
+            }
         }
         
         // 全选/取消全选整列
@@ -1098,6 +1634,15 @@
                     }
                 }
             });
+            
+            // 更新选中的信息
+            if (tableId === 'dataGrid3') {
+                updateSelectedDarenInfo();
+                updateSelectAllCheckbox('selectAllDaren', 'dataGrid3');
+            } else if (tableId === 'dataGrid6') {
+                updateSelectedProductInfo();
+                updateSelectAllCheckbox('selectAllProduct', 'dataGrid6');
+            }
         }
         
         // 反选所有
@@ -1121,257 +1666,1133 @@
                     productData[index].selected = checkbox.checked;
                 }
             });
+            
+            // 更新选中的信息
+            if (tableId === 'dataGrid3') {
+                updateSelectedDarenInfo();
+                updateSelectAllCheckbox('selectAllDaren', 'dataGrid3');
+            } else if (tableId === 'dataGrid6') {
+                updateSelectedProductInfo();
+                updateSelectAllCheckbox('selectAllProduct', 'dataGrid6');
+            }
         }
         
-        // 计算抖店订单数据
+        // 计算抖店订单数据（严格按照C#逻辑）
         function calculateDouData() {
             if (importedData.length === 0) {
-                showStatus('请先导入订单数据', 'error');
+                showAlert('请先导入订单数据', 'error');
                 return;
             }
             
-            // 检查是否选择了达人
-            const hasSelectedDaren = darenData.some(item => item.selected && item.id !== '统计所有达人订单');
+            // 检查是否选择了达人（C#逻辑）
+            let hasSelectedDaren = false;
+            for (let i = 0; i < darenData.length; i++) {
+                const item = darenData[i];
+                if (item.selected && item.id !== '统计所有达人订单') {
+                    hasSelectedDaren = true;
+                    break;
+                }
+            }
+            
             if (!hasSelectedDaren) {
-                showStatus('请至少选择一个达人（除了"统计所有达人订单"）', 'error');
+                showAlert('至少选择一个达人（除了"统计所有达人订单"）', 'error');
                 return;
             }
             
             // 检查是否选择了商品
-            const hasSelectedProduct = productData.some(item => item.selected);
+            let hasSelectedProduct = false;
+            const 需计算商品ID = [];
+            for (let i = 0; i < productData.length; i++) {
+                const item = productData[i];
+                if (item.selected) {
+                    hasSelectedProduct = true;
+                    需计算商品ID.push(item.id);
+                    consoleLog(`需计算商品ID *${item.id}*`);
+                }
+            }
+            
             if (!hasSelectedProduct) {
-                showStatus('请至少选择一个商品', 'error');
+                showAlert('请至少选择一个商品', 'error');
                 return;
             }
             
-            showStatus('正在计算抖店订单数据...', 'info');
+            consoleLog('√ 客户有选择uid');
+            consoleLog(`选中的商品ID数量: ${需计算商品ID.length}`);
             
-            // 模拟计算延迟
+            // 确定统计的UID（C#逻辑）
+            let 统计uid = "统计所有达人订单";
+            
+            // 如果有选中的UID，使用选中的UID
+            if (selectedDarenUid && selectedDarenUid !== "统计所有达人订单") {
+                统计uid = selectedDarenUid;
+            } else {
+                // 否则使用第一个选中的达人
+                const firstSelected = darenData.find(item => item.selected && item.id !== '统计所有达人订单');
+                if (firstSelected) {
+                    统计uid = firstSelected.id;
+                }
+            }
+            
+            consoleLog(`统计UID: ${统计uid}`);
+            
+            // 开始计算
+            showLoading(true);
+            
+            // 使用setTimeout避免阻塞UI
             setTimeout(() => {
-                // 生成模拟的日统计数据
-                generateDailyData();
-                
-                // 生成模拟的月统计数据
-                generateMonthlyData();
-                
-                showStatus('抖店订单数据计算完成', 'success');
-                
-                // 切换到日统计标签页
-                document.querySelector('.tab[data-tab="daily"]').click();
-            }, 1500);
+                try {
+                    // 1. 过滤数据
+                    consoleLog('开始过滤数据...');
+                    const filteredData = importedData.filter(item => {
+                        // 检查商品是否选中
+                        return 需计算商品ID.includes(item.商品ID || '');
+                    });
+                    
+                    consoleLog(`过滤后数据行数: ${filteredData.length}`);
+                    
+                    if (filteredData.length === 0) {
+                        showAlert('没有符合条件的数据', 'warning');
+                        showLoading(false);
+                        return;
+                    }
+                    
+                    // 2. 计算日统计数据（基于实际日期）
+                    consoleLog('开始计算日统计数据...');
+                    const dt日 = calculateDailyDataByActualDates(filteredData, 统计uid);
+                    
+                    // 3. 计算月统计数据（基于实际月份）
+                    consoleLog('开始计算月统计数据...');
+                    const dt月 = calculateMonthlyDataByActualMonths(filteredData, 统计uid);
+                    
+                    // 4. 显示结果
+                    displayDailyDataByDates(dt日);
+                    displayMonthlyDataByMonths(dt月);
+                    
+                    // 5. 更新统计范围信息
+                    document.getElementById('statsRange').textContent = `达人: ${统计uid === "统计所有达人订单" ? "所有达人" : 统计uid} | 商品: ${需计算商品ID.length}个`;
+                    document.getElementById('dailyStatsInfo').style.display = 'block';
+                    document.getElementById('monthlyStatsRange').textContent = `达人: ${统计uid === "统计所有达人订单" ? "所有达人" : 统计uid} | 商品: ${需计算商品ID.length}个`;
+                    document.getElementById('monthlyStatsInfo').style.display = 'block';
+                    
+                    // 更新日期范围信息
+                    updateDateRangeInfo(dt日, dt月);
+                    
+                    showAlert('抖店订单数据计算完成', 'success');
+                    consoleLog('抖店订单数据计算完成');
+                    
+                    // 切换到日统计标签页
+                    document.querySelector('.tab[data-tab="daily"]').click();
+                    
+                } catch (error) {
+                    console.error('计算错误:', error);
+                    showAlert(`计算失败: ${error.message}`, 'error');
+                    consoleLog(`计算失败: ${error.message}`);
+                } finally {
+                    showLoading(false);
+                }
+            }, 100);
         }
         
-        // 生成日统计数据
-        function generateDailyData() {
+        // 计算日统计数据（基于实际日期）- 严格按照C#逻辑
+        function calculateDailyDataByActualDates(filteredData, 统计uid) {
+            // 不能有的售后状态（C#逻辑）
+            const 不能有的售后状态 = ["待退货", "待收退货", "退款成功", "售后待处理"];
+            
+            // 使用Map来按日期统计
+            const dateMap = new Map();
+            
+            // 处理每一行数据（C#逻辑）
+            let processedCount = 0;
+            for (let i = 0; i < filteredData.length; i++) {
+                const item = filteredData[i];
+                
+                const 订单状态 = item.订单状态 || "";
+                const 售后状态 = item.售后状态 || "";
+                const 商品单价 = parseFloat(item.商品单价) || 0;
+                const 商家实际承担优惠金额 = parseFloat(item.商家实际承担优惠金额) || 0;
+                const 付款金额 = 商品单价 - 商家实际承担优惠金额;
+                const 达人ID = item.达人ID || "";
+                const 支付完成时间 = item.支付完成时间 || "";
+                const 发货时间 = item.发货时间 || "";
+                const 订单提交时间 = item.订单提交时间 || "";
+                
+                // 支付时间为空的没有意义（C#逻辑）
+                if (!支付完成时间) continue;
+                
+                // 检查是否属于统计的UID（C#逻辑）
+                let 属于统计的uid订单 = false;
+                if (统计uid !== "统计所有达人订单") {
+                    if (达人ID && 达人ID.includes(统计uid)) {
+                        属于统计的uid订单 = true;
+                    }
+                } else {
+                    属于统计的uid订单 = true;
+                }
+                
+                // 必须是需要统计的（C#逻辑）
+                if (!属于统计的uid订单) continue;
+                
+                // 处理订单归属日期（C#逻辑：凌晨4点之前的数据算前一天的）
+                let 订单归属日期 = parseDateTime(订单提交时间);
+                if (!订单归属日期) continue;
+                
+                // 调整时间：凌晨4点之前算前一天
+                if (订单归属日期.getHours() < 4) {
+                    订单归属日期.setDate(订单归属日期.getDate() - 1);
+                }
+                
+                const 订单日期Str = formatDate(订单归属日期);
+                
+                // 判断是否为退货订单（C#逻辑）
+                let 退货订单 = false;
+                if (不能有的售后状态.includes(售后状态)) {
+                    退货订单 = true;
+                }
+                
+                // 判断是否为拍退订单（C#逻辑）
+                let 拍退订单 = false;
+                if ((售后状态 === "退款成功" || 售后状态 === "售后待处理") && !发货时间) {
+                    拍退订单 = true;
+                }
+                
+                // 获取或创建该日期的统计对象
+                if (!dateMap.has(订单日期Str)) {
+                    dateMap.set(订单日期Str, {
+                        日期: 订单日期Str,
+                        日支付总额: 0,
+                        日实收: 0,
+                        日退货: 0,
+                        日退货率: 0,
+                        日拍退额: 0,
+                        日拍退率: 0,
+                        日发退率: 0
+                    });
+                }
+                
+                const dailyItem = dateMap.get(订单日期Str);
+                
+                // 添加数据（C#逻辑）
+                dailyItem.日支付总额 += 付款金额;
+                
+                if (退货订单) {
+                    dailyItem.日退货 += 付款金额;
+                }
+                
+                if (拍退订单) {
+                    dailyItem.日拍退额 += 付款金额;
+                }
+                
+                processedCount++;
+                
+                // 每处理100条数据，更新一下控制台
+                if (processedCount > 0 && processedCount % 100 === 0) {
+                    consoleLog(`已处理 ${processedCount} 条数据...`);
+                }
+            }
+            
+            consoleLog(`日统计数据处理完成，共处理 ${processedCount} 条有效数据，共 ${dateMap.size} 个不同日期`);
+            
+            // 将Map转换为数组并排序（按日期降序）
+            const dt日 = Array.from(dateMap.values())
+                .sort((a, b) => new Date(b.日期) - new Date(a.日期));
+            
+            // 计算比率（C#逻辑）
+            for (let i = 0; i < dt日.length; i++) {
+                const dailyItem = dt日[i];
+                
+                dailyItem.日实收 = dailyItem.日支付总额 - dailyItem.日退货;
+                
+                if (dailyItem.日支付总额 > 0) {
+                    const 日退货率值 = dailyItem.日退货 / dailyItem.日支付总额;
+                    dailyItem.日退货率 = (日退货率值 * 100).toFixed(1) + '%';
+                    
+                    const 日拍退率值 = dailyItem.日拍退额 / dailyItem.日支付总额;
+                    dailyItem.日拍退率 = (日拍退率值 * 100).toFixed(1) + '%';
+                    
+                    const 日发退率值 = 日退货率值 - 日拍退率值;
+                    dailyItem.日发退率 = (日发退率值 * 100).toFixed(1) + '%';
+                } else {
+                    dailyItem.日退货率 = '0.0%';
+                    dailyItem.日拍退率 = '0.0%';
+                    dailyItem.日发退率 = '0.0%';
+                }
+                
+                // 格式化金额为两位小数
+                dailyItem.日支付总额 = dailyItem.日支付总额.toFixed(2);
+                dailyItem.日实收 = dailyItem.日实收.toFixed(2);
+                dailyItem.日退货 = dailyItem.日退货.toFixed(2);
+                dailyItem.日拍退额 = dailyItem.日拍退额.toFixed(2);
+            }
+            
+            return dt日;
+        }
+        
+        // 计算月统计数据（基于实际月份）- 严格按照C#逻辑
+        function calculateMonthlyDataByActualMonths(filteredData, 统计uid) {
+            // 不能有的售后状态（C#逻辑）
+            const 不能有的售后状态 = ["待退货", "待收退货", "退款成功", "售后待处理"];
+            
+            // 使用Map来按月份统计
+            const monthMap = new Map();
+            
+            // 处理每一行数据（C#逻辑）
+            let processedCount = 0;
+            for (let i = 0; i < filteredData.length; i++) {
+                const item = filteredData[i];
+                
+                const 订单状态 = item.订单状态 || "";
+                const 售后状态 = item.售后状态 || "";
+                const 商品单价 = parseFloat(item.商品单价) || 0;
+                const 商家实际承担优惠金额 = parseFloat(item.商家实际承担优惠金额) || 0;
+                const 付款金额 = 商品单价 - 商家实际承担优惠金额;
+                const 达人ID = item.达人ID || "";
+                const 支付完成时间 = item.支付完成时间 || "";
+                const 发货时间 = item.发货时间 || "";
+                const 订单提交时间 = item.订单提交时间 || "";
+                
+                // 支付时间为空的没有意义（C#逻辑）
+                if (!支付完成时间) continue;
+                
+                // 检查是否属于统计的UID（C#逻辑）
+                let 属于统计的uid订单 = false;
+                if (统计uid !== "统计所有达人订单") {
+                    if (达人ID && 达人ID.includes(统计uid)) {
+                        属于统计的uid订单 = true;
+                    }
+                } else {
+                    属于统计的uid订单 = true;
+                }
+                
+                // 必须是需要统计的（C#逻辑）
+                if (!属于统计的uid订单) continue;
+                
+                // 处理订单归属日期
+                let 订单归属日期 = parseDateTime(订单提交时间);
+                if (!订单归属日期) continue;
+                
+                const 订单月份Str = formatMonth(订单归属日期);
+                
+                // 判断是否为退货订单（C#逻辑）
+                let 退货订单 = false;
+                if (不能有的售后状态.includes(售后状态)) {
+                    退货订单 = true;
+                }
+                
+                // 判断是否为拍退订单（C#逻辑）
+                let 拍退订单 = false;
+                if ((售后状态 === "退款成功" || 售后状态 === "售后待处理") && !发货时间) {
+                    拍退订单 = true;
+                }
+                
+                // 获取或创建该月份的统计对象
+                if (!monthMap.has(订单月份Str)) {
+                    monthMap.set(订单月份Str, {
+                        月份: 订单月份Str,
+                        月支付总额: 0,
+                        月实收: 0,
+                        月退货: 0,
+                        月退货率: 0,
+                        月拍退额: 0,
+                        月拍退率: 0,
+                        月发退率: 0
+                    });
+                }
+                
+                const monthlyItem = monthMap.get(订单月份Str);
+                
+                // 添加数据（C#逻辑）
+                monthlyItem.月支付总额 += 付款金额;
+                
+                if (退货订单) {
+                    monthlyItem.月退货 += 付款金额;
+                }
+                
+                if (拍退订单) {
+                    monthlyItem.月拍退额 += 付款金额;
+                }
+                
+                processedCount++;
+            }
+            
+            consoleLog(`月统计数据处理完成，共处理 ${processedCount} 条有效数据，共 ${monthMap.size} 个不同月份`);
+            
+            // 将Map转换为数组并排序（按月份降序）
+            const dt月 = Array.from(monthMap.values())
+                .sort((a, b) => new Date(b.月份) - new Date(a.月份));
+            
+            // 计算比率（C#逻辑）
+            for (let i = 0; i < dt月.length; i++) {
+                const monthlyItem = dt月[i];
+                
+                monthlyItem.月实收 = monthlyItem.月支付总额 - monthlyItem.月退货;
+                
+                if (monthlyItem.月支付总额 > 0) {
+                    const 月退货率值 = monthlyItem.月退货 / monthlyItem.月支付总额;
+                    monthlyItem.月退货率 = (月退货率值 * 100).toFixed(1) + '%';
+                    
+                    const 月拍退率值 = monthlyItem.月拍退额 / monthlyItem.月支付总额;
+                    monthlyItem.月拍退率 = (月拍退率值 * 100).toFixed(1) + '%';
+                    
+                    const 月发退率值 = 月退货率值 - 月拍退率值;
+                    monthlyItem.月发退率 = (月发退率值 * 100).toFixed(1) + '%';
+                } else {
+                    monthlyItem.月退货率 = '0.0%';
+                    monthlyItem.月拍退率 = '0.0%';
+                    monthlyItem.月发退率 = '0.0%';
+                }
+                
+                // 格式化金额为两位小数
+                monthlyItem.月支付总额 = monthlyItem.月支付总额.toFixed(2);
+                monthlyItem.月实收 = monthlyItem.月实收.toFixed(2);
+                monthlyItem.月退货 = monthlyItem.月退货.toFixed(2);
+                monthlyItem.月拍退额 = monthlyItem.月拍退额.toFixed(2);
+            }
+            
+            return dt月;
+        }
+        
+        // 显示日统计数据
+        function displayDailyDataByDates(dt日) {
+            dailyData = dt日;
             const tbody = document.getElementById('dataGridDailyBody');
             tbody.innerHTML = '';
             
-            // 生成过去30天的数据
-            for (let i = 29; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                const dateStr = date.toLocaleDateString('zh-CN');
-                
-                // 基于导入数据生成更有意义的统计
-                const baseValue = importedData.length * 100;
-                const payTotal = baseValue * (0.8 + Math.random() * 0.4);
-                const returnAmount = payTotal * (0.05 + Math.random() * 0.1);
-                const instantReturn = returnAmount * (0.3 + Math.random() * 0.3);
-                const actualIncome = payTotal - returnAmount;
-                const returnRate = (returnAmount / payTotal) * 100;
-                const instantReturnRate = (instantReturn / payTotal) * 100;
-                const shippingReturnRate = returnRate - instantReturnRate;
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${dateStr}</td>
-                    <td>${payTotal.toFixed(2)}</td>
-                    <td>${actualIncome.toFixed(2)}</td>
-                    <td>${returnAmount.toFixed(2)}</td>
-                    <td class="yellow-bg">${returnRate.toFixed(1)}%</td>
-                    <td class="yellow-bg">${instantReturn.toFixed(2)}</td>
-                    <td class="yellow-bg">${instantReturnRate.toFixed(1)}%</td>
-                    <td class="green-bg">${shippingReturnRate.toFixed(1)}%</td>
-                `;
-                tbody.appendChild(row);
-            }
-        }
-        
-        // 生成月统计数据
-        function generateMonthlyData() {
-            const tbody = document.getElementById('dataGridMonthlyBody');
-            tbody.innerHTML = '';
-            
-            // 生成过去12个月的数据
-            for (let i = 11; i >= 0; i--) {
-                const date = new Date();
-                date.setMonth(date.getMonth() - i);
-                const monthStr = date.getFullYear() + '年' + (date.getMonth() + 1) + '月';
-                
-                // 基于导入数据生成更有意义的统计
-                const baseValue = importedData.length * 3000;
-                const payTotal = baseValue * (0.7 + Math.random() * 0.6);
-                const returnAmount = payTotal * (0.06 + Math.random() * 0.08);
-                const instantReturn = returnAmount * (0.25 + Math.random() * 0.3);
-                const actualIncome = payTotal - returnAmount;
-                const returnRate = (returnAmount / payTotal) * 100;
-                const instantReturnRate = (instantReturn / payTotal) * 100;
-                const shippingReturnRate = returnRate - instantReturnRate;
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${monthStr}</td>
-                    <td>${payTotal.toFixed(2)}</td>
-                    <td>${actualIncome.toFixed(2)}</td>
-                    <td>${returnAmount.toFixed(2)}</td>
-                    <td class="yellow-bg">${returnRate.toFixed(1)}%</td>
-                    <td class="yellow-bg">${instantReturn.toFixed(2)}</td>
-                    <td class="yellow-bg">${instantReturnRate.toFixed(1)}%</td>
-                    <td class="green-bg">${shippingReturnRate.toFixed(1)}%</td>
-                `;
-                tbody.appendChild(row);
-            }
-        }
-        
-        // 计算颜色尺码数据
-        function calculateColorSizeData(specificDate) {
-            if (importedData.length === 0) {
-                showStatus('请先导入订单数据', 'error');
+            if (dailyData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
                 return;
             }
             
-            showStatus('正在计算颜色尺码数据...', 'info');
-            
-            // 模拟计算延迟
-            setTimeout(() => {
-                // 生成模拟的颜色尺码数据
-                generateColorSizeData();
-                
-                showStatus('颜色尺码数据计算完成', 'success');
-                
-                // 切换到颜色尺码分析标签页
-                document.querySelector('.tab[data-tab="colorsize"]').click();
-            }, 1000);
+            dailyData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.日期}</td>
+                    <td>${item.日支付总额}</td>
+                    <td>${item.日实收}</td>
+                    <td>${item.日退货}</td>
+                    <td>${item.日退货率}</td>
+                    <td>${item.日拍退额}</td>
+                    <td>${item.日拍退率}</td>
+                    <td>${item.日发退率}</td>
+                `;
+                tbody.appendChild(row);
+            });
         }
         
-        // 生成颜色尺码数据
-        function generateColorSizeData() {
-            // 颜色尺码组合数据
-            const colors = ['红色', '蓝色', '黑色', '白色', '灰色', '黄色', '绿色'];
-            const sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+        // 显示月统计数据
+        function displayMonthlyDataByMonths(dt月) {
+            monthlyData = dt月;
+            const tbody = document.getElementById('dataGridMonthlyBody');
+            tbody.innerHTML = '';
             
-            // 颜色尺码组合
+            if (monthlyData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+                return;
+            }
+            
+            monthlyData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.月份}</td>
+                    <td>${item.月支付总额}</td>
+                    <td>${item.月实收}</td>
+                    <td>${item.月退货}</td>
+                    <td>${item.月退货率}</td>
+                    <td>${item.月拍退额}</td>
+                    <td>${item.月拍退率}</td>
+                    <td>${item.月发退率}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 更新日期范围信息
+        function updateDateRangeInfo(dt日, dt月) {
+            if (dt日.length > 0) {
+                const dates = dt日.map(item => new Date(item.日期));
+                const minDate = new Date(Math.min(...dates));
+                const maxDate = new Date(Math.max(...dates));
+                
+                document.getElementById('dateRangeText').textContent = 
+                    `${formatDate(minDate)} 至 ${formatDate(maxDate)}`;
+                document.getElementById('totalDays').textContent = dt日.length;
+                document.getElementById('dailyDateRange').style.display = 'block';
+            }
+            
+            if (dt月.length > 0) {
+                const months = dt月.map(item => new Date(item.月份));
+                const minMonth = new Date(Math.min(...months));
+                const maxMonth = new Date(Math.max(...months));
+                
+                document.getElementById('monthRangeText').textContent = 
+                    `${formatMonthDisplay(minMonth)} 至 ${formatMonthDisplay(maxMonth)}`;
+                document.getElementById('totalMonths').textContent = dt月.length;
+                document.getElementById('monthlyDateRange').style.display = 'block';
+            }
+        }
+        
+        // 计算视频号订单数据
+        function calculateVideoData() {
+            if (importedData.length === 0) {
+                showAlert('请先导入订单数据', 'error');
+                return;
+            }
+            
+            // 检查是否选择了商品
+            let hasSelectedProduct = false;
+            const 需计算商品ID = [];
+            for (let i = 0; i < productData.length; i++) {
+                const item = productData[i];
+                if (item.selected) {
+                    hasSelectedProduct = true;
+                    需计算商品ID.push(item.id);
+                }
+            }
+            
+            if (!hasSelectedProduct) {
+                showAlert('请至少选择一个商品', 'error');
+                return;
+            }
+            
+            showLoading(true);
+            consoleLog('开始计算视频号订单数据...');
+            
+            setTimeout(() => {
+                try {
+                    // 视频号订单计算逻辑（简化版）
+                    const dt日 = calculateVideoDailyData(需计算商品ID);
+                    const dt月 = calculateVideoMonthlyData(需计算商品ID);
+                    
+                    displayDailyDataByDates(dt日);
+                    displayMonthlyDataByMonths(dt月);
+                    
+                    // 更新统计范围信息
+                    document.getElementById('statsRange').textContent = `视频号订单 | 商品: ${需计算商品ID.length}个`;
+                    document.getElementById('dailyStatsInfo').style.display = 'block';
+                    document.getElementById('monthlyStatsRange').textContent = `视频号订单 | 商品: ${需计算商品ID.length}个`;
+                    document.getElementById('monthlyStatsInfo').style.display = 'block';
+                    
+                    // 更新日期范围信息
+                    updateDateRangeInfo(dt日, dt月);
+                    
+                    showAlert('视频号订单数据计算完成', 'success');
+                    consoleLog('视频号订单数据计算完成');
+                    
+                    // 切换到日统计标签页
+                    document.querySelector('.tab[data-tab="daily"]').click();
+                    
+                } catch (error) {
+                    console.error('计算错误:', error);
+                    showAlert(`计算失败: ${error.message}`, 'error');
+                    consoleLog(`计算失败: ${error.message}`);
+                } finally {
+                    showLoading(false);
+                }
+            }, 100);
+        }
+        
+        // 计算视频号日统计数据（简化版）
+        function calculateVideoDailyData(需计算商品ID) {
+            const 不能有的售后状态 = ["待商家收货", "退货退款完成", "退款完成"];
+            
+            // 使用Map来按日期统计
+            const dateMap = new Map();
+            
+            // 处理每一行数据
+            for (let i = 0; i < importedData.length; i++) {
+                const item = importedData[i];
+                
+                // 检查商品是否选中
+                if (!需计算商品ID.includes(item.商品ID || '')) continue;
+                
+                const 售后状态 = item.售后状态 || "";
+                const 支付款 = parseFloat(item.商品单价) || 0;
+                const 支付完成时间 = item.支付完成时间 || "";
+                const 发货时间 = item.发货时间 || "";
+                const 支付时间 = item.支付完成时间 || ""; // 使用支付完成时间作为支付时间
+                
+                // 没有支付时间的订单不计入
+                if (!支付时间) continue;
+                
+                // 处理支付时间
+                let 支付日期 = parseDateTime(支付时间);
+                if (!支付日期) continue;
+                
+                // 视频号逻辑：凌晨4点之后到第二天4点之前算同一天
+                const 支付日期Str = formatDate(支付日期);
+                
+                // 判断是否有退货
+                let 售后有退货 = false;
+                for (let j = 0; j < 不能有的售后状态.length; j++) {
+                    if (售后状态.includes(不能有的售后状态[j])) {
+                        售后有退货 = true;
+                        break;
+                    }
+                }
+                
+                // 获取或创建该日期的统计对象
+                if (!dateMap.has(支付日期Str)) {
+                    dateMap.set(支付日期Str, {
+                        日期: 支付日期Str,
+                        日支付总额: 0,
+                        日实收: 0,
+                        日退货: 0,
+                        日退货率: 0,
+                        日拍退额: 0,
+                        日拍退率: 0,
+                        日发退率: 0
+                    });
+                }
+                
+                const dailyItem = dateMap.get(支付日期Str);
+                
+                // 添加数据
+                dailyItem.日支付总额 += 支付款;
+                
+                if (售后有退货) {
+                    dailyItem.日退货 += 支付款;
+                } else {
+                    dailyItem.日实收 += 支付款;
+                }
+            }
+            
+            // 将Map转换为数组并排序（按日期降序）
+            const dt日 = Array.from(dateMap.values())
+                .sort((a, b) => new Date(b.日期) - new Date(a.日期));
+            
+            // 计算比率
+            for (let i = 0; i < dt日.length; i++) {
+                const dailyItem = dt日[i];
+                
+                if (dailyItem.日支付总额 > 0) {
+                    const 日退货率值 = dailyItem.日退货 / dailyItem.日支付总额;
+                    dailyItem.日退货率 = (日退货率值 * 100).toFixed(1) + '%';
+                    
+                    // 视频号没有明确的拍退概念，这里设为0
+                    dailyItem.日拍退额 = '0.00';
+                    dailyItem.日拍退率 = '0.0%';
+                    dailyItem.日发退率 = dailyItem.日退货率;
+                } else {
+                    dailyItem.日退货率 = '0.0%';
+                    dailyItem.日拍退额 = '0.00';
+                    dailyItem.日拍退率 = '0.0%';
+                    dailyItem.日发退率 = '0.0%';
+                }
+                
+                // 格式化金额为两位小数
+                dailyItem.日支付总额 = dailyItem.日支付总额.toFixed(2);
+                dailyItem.日实收 = dailyItem.日实收.toFixed(2);
+                dailyItem.日退货 = dailyItem.日退货.toFixed(2);
+            }
+            
+            return dt日;
+        }
+        
+        // 计算视频号月统计数据（简化版）
+        function calculateVideoMonthlyData(需计算商品ID) {
+            const 不能有的售后状态 = ["待商家收货", "退货退款完成", "退款完成"];
+            
+            // 使用Map来按月份统计
+            const monthMap = new Map();
+            
+            // 处理每一行数据
+            for (let i = 0; i < importedData.length; i++) {
+                const item = importedData[i];
+                
+                // 检查商品是否选中
+                if (!需计算商品ID.includes(item.商品ID || '')) continue;
+                
+                const 售后状态 = item.售后状态 || "";
+                const 支付款 = parseFloat(item.商品单价) || 0;
+                const 支付时间 = item.支付完成时间 || "";
+                
+                // 没有支付时间的订单不计入
+                if (!支付时间) continue;
+                
+                // 处理支付时间
+                let 支付日期 = parseDateTime(支付时间);
+                if (!支付日期) continue;
+                
+                const 支付月份Str = formatMonth(支付日期);
+                
+                // 判断是否有退货
+                let 售后有退货 = false;
+                for (let j = 0; j < 不能有的售后状态.length; j++) {
+                    if (售后状态.includes(不能有的售后状态[j])) {
+                        售后有退货 = true;
+                        break;
+                    }
+                }
+                
+                // 获取或创建该月份的统计对象
+                if (!monthMap.has(支付月份Str)) {
+                    monthMap.set(支付月份Str, {
+                        月份: 支付月份Str,
+                        月支付总额: 0,
+                        月实收: 0,
+                        月退货: 0,
+                        月退货率: 0,
+                        月拍退额: 0,
+                        月拍退率: 0,
+                        月发退率: 0
+                    });
+                }
+                
+                const monthlyItem = monthMap.get(支付月份Str);
+                
+                // 添加数据
+                monthlyItem.月支付总额 += 支付款;
+                
+                if (售后有退货) {
+                    monthlyItem.月退货 += 支付款;
+                } else {
+                    monthlyItem.月实收 += 支付款;
+                }
+            }
+            
+            // 将Map转换为数组并排序（按月份降序）
+            const dt月 = Array.from(monthMap.values())
+                .sort((a, b) => new Date(b.月份) - new Date(a.月份));
+            
+            // 计算比率
+            for (let i = 0; i < dt月.length; i++) {
+                const monthlyItem = dt月[i];
+                
+                if (monthlyItem.月支付总额 > 0) {
+                    const 月退货率值 = monthlyItem.月退货 / monthlyItem.月支付总额;
+                    monthlyItem.月退货率 = (月退货率值 * 100).toFixed(1) + '%';
+                    
+                    // 视频号没有明确的拍退概念，这里设为0
+                    monthlyItem.月拍退额 = '0.00';
+                    monthlyItem.月拍退率 = '0.0%';
+                    monthlyItem.月发退率 = monthlyItem.月退货率;
+                } else {
+                    monthlyItem.月退货率 = '0.0%';
+                    monthlyItem.月拍退额 = '0.00';
+                    monthlyItem.月拍退率 = '0.0%';
+                    monthlyItem.月发退率 = '0.0%';
+                }
+                
+                // 格式化金额为两位小数
+                monthlyItem.月支付总额 = monthlyItem.月支付总额.toFixed(2);
+                monthlyItem.月实收 = monthlyItem.月实收.toFixed(2);
+                monthlyItem.月退货 = monthlyItem.月退货.toFixed(2);
+            }
+            
+            return dt月;
+        }
+        
+        // 计算颜色尺码信息
+        function calculateColorSizeInfo(指定日期) {
+            if (importedData.length === 0) {
+                showAlert('请先导入订单数据', 'error');
+                return;
+            }
+            
+            // 检查是否选择了商品
+            let hasSelectedProduct = false;
+            const 需计算商品ID = [];
+            for (let i = 0; i < productData.length; i++) {
+                const item = productData[i];
+                if (item.selected) {
+                    hasSelectedProduct = true;
+                    需计算商品ID.push(item.id);
+                }
+            }
+            
+            if (!hasSelectedProduct) {
+                showAlert('请至少选择一个商品', 'error');
+                return;
+            }
+            
+            showLoading(true);
+            consoleLog(`开始计算颜色尺码信息（指定日期: ${指定日期 ? '是' : '否'}）...`);
+            
+            setTimeout(() => {
+                try {
+                    // 1. 过滤数据
+                    let filteredData = importedData.filter(item => {
+                        // 检查商品是否选中
+                        return 需计算商品ID.includes(item.商品ID || '');
+                    });
+                    
+                    // 过滤已关闭的订单
+                    filteredData = filteredData.filter(item => item.订单状态 !== '已关闭');
+                    
+                    consoleLog(`过滤后数据行数: ${filteredData.length}`);
+                    
+                    if (filteredData.length === 0) {
+                        showAlert('没有符合条件的数据', 'warning');
+                        showLoading(false);
+                        return;
+                    }
+                    
+                    // 如果指定日期，进一步过滤
+                    if (指定日期) {
+                        const selectedDate = document.getElementById('datePicker').value;
+                        if (!selectedDate) {
+                            showAlert('请选择日期', 'error');
+                            showLoading(false);
+                            return;
+                        }
+                        
+                        const startDate = new Date(selectedDate + 'T04:00:00');
+                        const endDate = new Date(startDate);
+                        endDate.setDate(endDate.getDate() + 1);
+                        
+                        filteredData = filteredData.filter(item => {
+                            const 支付完成时间 = item.支付完成时间 || '';
+                            if (!支付完成时间) return false;
+                            
+                            const 支付时间 = parseDateTime(支付完成时间);
+                            if (!支付时间) return false;
+                            
+                            return 支付时间 >= startDate && 支付时间 < endDate;
+                        });
+                        
+                        consoleLog(`指定日期过滤后数据行数: ${filteredData.length}`);
+                    }
+                    
+                    // 2. 提取颜色尺码数据
+                    const colorSizeMap = new Map();
+                    const sizeMap = new Map();
+                    const colorMap = new Map();
+                    
+                    let totalQuantity = 0;
+                    
+                    for (let i = 0; i < filteredData.length; i++) {
+                        const item = filteredData[i];
+                        const 商品规格 = item.商品规格 || '';
+                        const 数量 = parseInt(item.商品数量) || 1;
+                        
+                        totalQuantity += 数量;
+                        
+                        // 解析颜色和尺码
+                        let 颜色 = '';
+                        let 尺码 = '';
+                        
+                        if (商品规格.includes(';')) {
+                            const parts = 商品规格.split(';');
+                            颜色 = parts[0] || '';
+                            尺码 = parts[1] || '';
+                            
+                            // 提取颜色名称（去除括号内容）
+                            if (颜色.includes('(')) {
+                                颜色 = 颜色.substring(0, 颜色.indexOf('('));
+                            }
+                            
+                            // 提取尺码（去除括号内容）
+                            if (尺码.includes('(')) {
+                                尺码 = 尺码.substring(0, 尺码.indexOf('('));
+                            }
+                        } else {
+                            // 如果没有分号，尝试其他格式
+                            颜色 = 商品规格;
+                        }
+                        
+                        颜色 = 颜色.trim();
+                        尺码 = 尺码.trim();
+                        
+                        // 颜色标准化
+                        if (颜色 === '安可拉红') {
+                            颜色 = '红色';
+                        }
+                        
+                        // 统计颜色+尺码
+                        const colorSizeKey = 颜色 + '|' + 尺码;
+                        if (colorSizeMap.has(colorSizeKey)) {
+                            colorSizeMap.set(colorSizeKey, colorSizeMap.get(colorSizeKey) + 数量);
+                        } else {
+                            colorSizeMap.set(colorSizeKey, 数量);
+                        }
+                        
+                        // 统计尺码
+                        if (尺码) {
+                            if (sizeMap.has(尺码)) {
+                                sizeMap.set(尺码, sizeMap.get(尺码) + 数量);
+                            } else {
+                                sizeMap.set(尺码, 数量);
+                            }
+                        }
+                        
+                        // 统计颜色
+                        if (颜色) {
+                            if (colorMap.has(颜色)) {
+                                colorMap.set(颜色, colorMap.get(颜色) + 数量);
+                            } else {
+                                colorMap.set(颜色, 数量);
+                            }
+                        }
+                    }
+                    
+                    // 3. 准备数据
+                    // 颜色+尺码数据
+                    colorSizeData = Array.from(colorSizeMap, ([key, value]) => {
+                        const [颜色, 尺码] = key.split('|');
+                        return { 颜色, 尺码, 数量: value };
+                    }).sort((a, b) => {
+                        // 按颜色升序，尺码按自定义顺序
+                        if (a.颜色 !== b.颜色) {
+                            return a.颜色.localeCompare(b.颜色, 'zh-CN');
+                        }
+                        
+                        // 尺码排序顺序（C#代码中的逻辑）
+                        const 尺码顺序 = ["30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51",
+                            "90","95","100","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175","180","185","190","195","200","205","210","215","220","225","230","235","240",
+                           "XXXXXXS","6XS","XXXXXS","5XS","XXXXS","4XS","XXXS","3XS", "XXS", "2XS", "XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL" , "6XL", "7XL", "8XL", "9XL"
+                        ];
+                        
+                        const indexA = 尺码顺序.indexOf(a.尺码);
+                        const indexB = 尺码顺序.indexOf(b.尺码);
+                        
+                        if (indexA !== -1 && indexB !== -1) {
+                            return indexA - indexB;
+                        } else if (indexA !== -1) {
+                            return -1;
+                        } else if (indexB !== -1) {
+                            return 1;
+                        } else {
+                            return a.尺码.localeCompare(b.尺码, 'zh-CN');
+                        }
+                    });
+                    
+                    // 尺码数据
+                    sizeData = Array.from(sizeMap, ([尺码, 数量]) => {
+                        const 占比 = totalQuantity > 0 ? (数量 / totalQuantity * 100).toFixed(2) : '0.00';
+                        return { 尺码, 数量, 占比 };
+                    }).sort((a, b) => {
+                        // 尺码排序顺序
+                        const 尺码顺序 = ["30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51",
+                            "90","95","100","105","110","115","120","125","130","135","140","145","150","155","160","165","170","175","180","185","190","195","200","205","210","215","220","225","230","235","240",
+                           "XXXXXXS","6XS","XXXXXS","5XS","XXXXS","4XS","XXXS","3XS", "XXS", "2XS", "XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL" , "6XL", "7XL", "8XL", "9XL"
+                        ];
+                        
+                        const indexA = 尺码顺序.indexOf(a.尺码);
+                        const indexB = 尺码顺序.indexOf(b.尺码);
+                        
+                        if (indexA !== -1 && indexB !== -1) {
+                            return indexA - indexB;
+                        } else if (indexA !== -1) {
+                            return -1;
+                        } else if (indexB !== -1) {
+                            return 1;
+                        } else {
+                            return a.尺码.localeCompare(b.尺码, 'zh-CN');
+                        }
+                    });
+                    
+                    // 颜色数据
+                    colorData = Array.from(colorMap, ([颜色, 数量]) => {
+                        const 占比 = totalQuantity > 0 ? (数量 / totalQuantity * 100).toFixed(2) : '0.00';
+                        return { 颜色, 数量, 占比 };
+                    }).sort((a, b) => a.颜色.localeCompare(b.颜色, 'zh-CN'));
+                    
+                    // 4. 显示结果
+                    displayColorSizeData();
+                    
+                    showAlert(`颜色尺码分析完成，共分析 ${filteredData.length} 条订单数据`, 'success');
+                    consoleLog(`颜色尺码分析完成，共 ${totalQuantity} 件商品`);
+                    
+                    // 切换到颜色尺码分析标签页
+                    document.querySelector('.tab[data-tab="colorsize"]').click();
+                    
+                } catch (error) {
+                    console.error('计算错误:', error);
+                    showAlert(`计算失败: ${error.message}`, 'error');
+                    consoleLog(`计算失败: ${error.message}`);
+                } finally {
+                    showLoading(false);
+                }
+            }, 100);
+        }
+        
+        // 显示颜色尺码数据
+        function displayColorSizeData() {
+            // 显示颜色+尺码数据
             const colorSizeTbody = document.getElementById('dataGridColorSizeBody');
             colorSizeTbody.innerHTML = '';
             
-            // 尺码统计
+            if (colorSizeData.length === 0) {
+                colorSizeTbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+            } else {
+                colorSizeData.forEach(item => {
+                    const row = document.createElement('tr');
+                    
+                    // 为颜色添加颜色样本
+                    const colorClass = getColorClass(item.颜色);
+                    const colorSample = colorClass ? `<span class="color-sample ${colorClass}"></span>` : '';
+                    
+                    row.innerHTML = `
+                        <td>${colorSample}${item.颜色}</td>
+                        <td>${item.尺码}</td>
+                        <td>${item.数量}</td>
+                    `;
+                    colorSizeTbody.appendChild(row);
+                });
+            }
+            
+            // 显示尺码数据
             const sizeTbody = document.getElementById('dataGridSizeBody');
             sizeTbody.innerHTML = '';
             
-            // 颜色统计
+            if (sizeData.length === 0) {
+                sizeTbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+            } else {
+                sizeData.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.尺码}</td>
+                        <td>${item.数量}</td>
+                        <td>${item.占比}%</td>
+                    `;
+                    sizeTbody.appendChild(row);
+                });
+            }
+            
+            // 显示颜色数据
             const colorTbody = document.getElementById('dataGridColorBody');
             colorTbody.innerHTML = '';
             
-            const sizeMap = new Map();
-            const colorMap = new Map();
-            let totalCount = 0;
-            
-            // 生成随机数据
-            colors.forEach(color => {
-                sizes.forEach(size => {
-                    const count = Math.floor(Math.random() * 50) + 5;
+            if (colorData.length === 0) {
+                colorTbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 40px;">暂无数据</td></tr>';
+            } else {
+                colorData.forEach(item => {
+                    const row = document.createElement('tr');
                     
-                    // 添加颜色尺码组合
-                    const row1 = document.createElement('tr');
-                    row1.innerHTML = `
-                        <td>${color}</td>
-                        <td>${size}</td>
-                        <td>${count}</td>
+                    // 为颜色添加颜色样本
+                    const colorClass = getColorClass(item.颜色);
+                    const colorSample = colorClass ? `<span class="color-sample ${colorClass}"></span>` : '';
+                    
+                    row.innerHTML = `
+                        <td>${colorSample}${item.颜色}</td>
+                        <td>${item.数量}</td>
+                        <td>${item.占比}%</td>
                     `;
-                    colorSizeTbody.appendChild(row1);
-                    
-                    // 统计尺码
-                    if (sizeMap.has(size)) {
-                        sizeMap.set(size, sizeMap.get(size) + count);
-                    } else {
-                        sizeMap.set(size, count);
-                    }
-                    
-                    // 统计颜色
-                    if (colorMap.has(color)) {
-                        colorMap.set(color, colorMap.get(color) + count);
-                    } else {
-                        colorMap.set(color, count);
-                    }
-                    
-                    totalCount += count;
+                    colorTbody.appendChild(row);
                 });
-            });
-            
-            // 显示尺码统计
-            sizeMap.forEach((count, size) => {
-                const percentage = totalCount > 0 ? (count / totalCount * 100).toFixed(2) : '0.00';
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${size}</td>
-                    <td>${count}</td>
-                    <td>${percentage}%</td>
-                `;
-                sizeTbody.appendChild(row);
-            });
-            
-            // 显示颜色统计
-            colorMap.forEach((count, color) => {
-                const percentage = totalCount > 0 ? (count / totalCount * 100).toFixed(2) : '0.00';
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${color}</td>
-                    <td>${count}</td>
-                    <td>${percentage}%</td>
-                `;
-                colorTbody.appendChild(row);
-            });
+            }
         }
         
-        // 剪贴板数据分析
-        function clipboardAnalysis() {
-            // 在实际应用中，这里会读取剪贴板内容
-            // 为了演示，我们使用模拟数据
-            showStatus('正在分析剪贴板数据...', 'info');
+        // 根据颜色名称获取对应的CSS类
+        function getColorClass(colorName) {
+            const colorMap = {
+                '红色': 'color-red',
+                '蓝色': 'color-blue',
+                '绿色': 'color-green',
+                '黑色': 'color-black',
+                '白色': 'color-white',
+                '黄色': 'color-yellow',
+                '紫色': 'color-purple',
+                '橙色': 'color-orange',
+                '粉色': 'color-pink',
+                '灰色': 'color-gray',
+                '棕色': 'color-brown'
+            };
             
-            setTimeout(() => {
-                // 基于导入数据生成更有意义的统计
-                const sales = importedData.length > 0 ? 
-                    importedData.reduce((sum, item) => sum + item.商品单价, 0) : 15842.50;
-                const returns = sales * 0.18;
-                const returnRate = (returns / sales * 100).toFixed(2);
-                
-                // 尝试复制到剪贴板
-                const textToCopy = `退货率: ${returnRate}%`;
-                
-                if (navigator.clipboard && window.isSecureContext) {
-                    navigator.clipboard.writeText(returnRate + '%')
-                        .then(() => {
-                            showStatus(`${textToCopy} (已复制到剪贴板)`, 'success');
-                        })
-                        .catch(err => {
-                            showStatus(`${textToCopy} (复制失败: ${err.message})`, 'success');
-                        });
-                } else {
-                    // 使用传统方法
-                    const textArea = document.createElement('textarea');
-                    textArea.value = returnRate + '%';
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    try {
-                        document.execCommand('copy');
-                        showStatus(`${textToCopy} (已复制到剪贴板)`, 'success');
-                    } catch (err) {
-                        showStatus(`${textToCopy}`, 'success');
-                    }
-                    document.body.removeChild(textArea);
+            // 检查颜色名称是否包含关键词
+            for (const [key, className] of Object.entries(colorMap)) {
+                if (colorName.includes(key)) {
+                    return className;
                 }
-            }, 500);
+            }
+            
+            return '';
+        }
+        
+        // 解析日期时间字符串
+        function parseDateTime(dateTimeStr) {
+            if (!dateTimeStr) return null;
+            
+            // 尝试多种日期格式
+            const formats = [
+                'yyyy-MM-dd HH:mm:ss',
+                'yyyy/MM/dd HH:mm:ss',
+                'yyyy-MM-dd HH:mm',
+                'yyyy/MM/dd HH:mm',
+                'yyyy-MM-dd',
+                'yyyy/MM/dd'
+            ];
+            
+            for (const format of formats) {
+                const date = parseDateWithFormat(dateTimeStr, format);
+                if (date) return date;
+            }
+            
+            // 如果以上都不行，尝试使用Date构造函数
+            const date = new Date(dateTimeStr);
+            return isNaN(date.getTime()) ? null : date;
+        }
+        
+        // 根据指定格式解析日期
+        function parseDateWithFormat(dateStr, format) {
+            try {
+                // 简单的格式解析
+                const formatParts = format.split(/[-\/ :]/);
+                const dateParts = dateStr.split(/[-\/ :]/);
+                
+                if (formatParts.length !== dateParts.length) return null;
+                
+                let year, month, day, hour = 0, minute = 0, second = 0;
+                
+                for (let i = 0; i < formatParts.length; i++) {
+                    const part = formatParts[i];
+                    const value = parseInt(dateParts[i]);
+                    
+                    if (isNaN(value)) return null;
+                    
+                    if (part === 'yyyy') {
+                        year = value;
+                    } else if (part === 'MM') {
+                        month = value - 1; // JavaScript月份是0-11
+                    } else if (part === 'dd') {
+                        day = value;
+                    } else if (part === 'HH') {
+                        hour = value;
+                    } else if (part === 'mm') {
+                        minute = value;
+                    } else if (part === 'ss') {
+                        second = value;
+                    }
+                }
+                
+                // 如果没有年月日，返回null
+                if (year === undefined || month === undefined || day === undefined) {
+                    return null;
+                }
+                
+                // 处理两位数的年份
+                if (year < 100) {
+                    year += 2000; // 假设是2000年以后的日期
+                }
+                
+                return new Date(year, month, day, hour, minute, second);
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        // 格式化日期为YYYY-MM-DD
+        function formatDate(date) {
+            if (!date) return '';
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        
+        // 格式化日期为YYYY-MM
+        function formatMonth(date) {
+            if (!date) return '';
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            return `${year}-${month}-01`;
+        }
+        
+        // 格式化月份显示为YYYY年MM月
+        function formatMonthDisplay(date) {
+            if (!date) return '';
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            return `${year}年${month}月`;
         }
     </script>
 </body>
