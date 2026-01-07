@@ -1461,7 +1461,7 @@
             // 转换为数组并排序（按数量降序）
             productData = Array.from(productMap, ([key, value]) => {
                 const [name, id] = key.split('|');
-                return { name, id, count: value, selected: true }; // 默认选中（C#代码中的逻辑）
+                return { name, id, count: value, selected: false }; // 默认不选中（C#代码中的逻辑）
             }).sort((a, b) => b.count - a.count);
             
             // 显示商品数据
